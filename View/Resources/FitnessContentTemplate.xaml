@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:userControls="clr-namespace:View.UserControls"
+  xmlns:types="clr-namespace:Fitness.Common.Contents;assembly=Common">
+
+    <DataTemplate x:Key="AddLanseTypeTemplate" DataType="{x:Type types:IAddLanseTypeContent}">
+        <userControls:AddLanseType/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AddLanseTemplate" DataType="{x:Type types:IAddLanseContent}">
+        <userControls:AddLanse/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AddUserTemplate" DataType="{x:Type types:IAddUserContent}">
+        <userControls:AddUser/>
+    </DataTemplate>
+
+</ResourceDictionary>

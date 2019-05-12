@@ -1,10 +1,10 @@
-﻿using Fitness.Common.MVVM;
-using Fitness.View;
-using Fitness.ViewModel;
-using System.Windows;
-
-namespace Fitness
+﻿namespace Fitness
 {
+    using Fitness.Common.MVVM;
+    using Fitness.View;
+    using Fitness.ViewModel;
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

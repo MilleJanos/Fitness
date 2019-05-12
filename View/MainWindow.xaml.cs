@@ -10,7 +10,7 @@ namespace Fitness.View
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.Closed += MainWindow_Closed;
         }
 
