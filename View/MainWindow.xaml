@@ -18,54 +18,71 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-
+    <ScrollViewer>
         
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="1"
-                    Orientation="Vertical">
+        <Grid>
 
-            <TabControl Grid.Row="1"
-                        Grid.Column="1"
-                        ItemsSource="{Binding Contents}"
-                        SelectedItem="{Binding SelectedContent, Mode=TwoWay}"
-                        ContentTemplateSelector="{StaticResource TemplateSelector}">
-           
+            <Grid Visibility="{Binding LoginVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
 
-            </TabControl>
+                <TextBlock Text="TODO: Login Pange"></TextBlock>
+                
+                <!-- DOTO: Andi -->
+                
+            </Grid>
+
+            <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel Grid.Row="1" 
+                            Grid.Column="1"
+                            Orientation="Vertical">
+
+                    <TabControl Grid.Row="1"
+                                Grid.Column="1"
+                                ItemsSource="{Binding Contents}"
+                                SelectedItem="{Binding SelectedContent, Mode=TwoWay}"
+                                ContentTemplateSelector="{StaticResource TemplateSelector}">
+
+
+                    </TabControl>
+
+                    <!-- Row 1 -->
+                    <TextBlock Text="{Binding PageTitle, Mode=OneWay}" MinWidth="100" Margin="4" FontSize="15" TextAlignment="Center"></TextBlock>
+
+                    <!-- Row 2 -->
+                    <TextBox Text="{Binding PageTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Margin="4" FontSize="15"/>
+
+
+                </StackPanel>
+
+
+                <Button Grid.Row="3" 
+                        Grid.Column="3" 
+                        Content="Exit" 
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right" 
+                        Margin="10" Padding="20 2 20 2" 
+                        Command="{Binding CloseCommand}"/>
+
+
+            </Grid>
+          
             
-            <!-- Row 1 -->
-            <TextBlock Text="{Binding PageTitle, Mode=OneWay}" MinWidth="100" Margin="4" FontSize="15" TextAlignment="Center"></TextBlock>
-            
-            <!-- Row 2 -->
-            <TextBox Text="{Binding PageTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Margin="4" FontSize="15"/>
-
-            
-        </StackPanel>
-
-
-        <Button Grid.Row="3" 
-                Grid.Column="3" 
-                Content="Exit" 
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" 
-                Margin="10" Padding="20 2 20 2" 
-                Command="{Binding CloseCommand}"/>
-
-
-    </Grid>
+        </Grid>
+    </ScrollViewer>
     
+
 </Window>

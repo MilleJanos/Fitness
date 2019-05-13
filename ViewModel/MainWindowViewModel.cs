@@ -14,18 +14,98 @@ namespace Fitness.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private bool _loginVisibility;
+        private bool _homeVisibility;
 
-        private string _pageTitle = "MainPage";
-        private ObservableCollection<IMainContent> _contents;
-        private IMainContent _selectedContent;
+
+        
 
         public MainWindowViewModel()
         {
             this.CloseCommand = new RelayCommand(this.CloseCommandExecute);
 
+            LoginVisibility = true;
+            HomeVisibility = false;
+
             GenerateContents();
         }
 
+        //
+        // Common: Switch
+        //
+
+        public bool LoginVisibility
+        {
+            get
+            {
+                return _loginVisibility;
+            }
+            set
+            {
+                _loginVisibility = value;
+                if ( _loginVisibility == true )
+                {
+                    if ( HomeVisibility == true )
+                    {
+                        HomeVisibility = false;
+                    }
+                }
+                else
+                {
+                    if ( HomeVisibility == false )
+                    {
+                        HomeVisibility = true;
+                    }
+                }
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool HomeVisibility
+        {
+            get
+            {
+                return _homeVisibility;
+            }
+            set
+            {
+                _homeVisibility = value;
+                if( _homeVisibility == true )
+                {
+                    if ( LoginVisibility == true )
+                    {
+                        LoginVisibility = false;
+                    }
+                }
+                else
+                {
+                    if ( LoginVisibility == false )
+                    {
+                        LoginVisibility = true;
+                    }
+                }
+                RaisePropertyChanged();
+            }
+        }
+
+        //
+        // LOGIN:
+        //
+
+        // TODO
+
+        //
+        // HOME:
+        //
+
+        // TODO
+
+        //
+        // DEBUG:
+        //
+        private string _pageTitle = "MainPage";
+        private ObservableCollection<IMainContent> _contents;
+        private IMainContent _selectedContent;
 
         public RelayCommand CloseCommand { get; private set; }
 

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Fitness.Common.Contents
+namespace ViewModel.UserControls
 {
-    public interface IAddLanseContent : IMainContent
+    class UserManagerViewModel
     {
     }
 }
