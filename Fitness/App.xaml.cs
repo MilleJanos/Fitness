@@ -1,8 +1,10 @@
 ﻿namespace Fitness
 {
     using Fitness.Common.MVVM;
+    using Fitness.Model.DBContext;
     using Fitness.View;
     using Fitness.ViewModel;
+    using System;
     using System.Windows;
 
     /// <summary>
@@ -14,7 +16,7 @@
         {
             base.OnStartup(e);
             this.Initialize();
-            //this.InitializeData();
+            this.InitializeData();
             this.OpenMainWindow();
         }
 
@@ -33,18 +35,18 @@
             ViewService.CloseDialog(mainWindowViewModel);
         }
 
-        //private void InitializeData()
-        //{
-        //    try
+        private void InitializeData()
+        {
+            try
 
-        //    {
-        //        DBInitializer dbinit = new DBInitializer();
-        //        dbinit.InitializeDatabase(new TMCatalogDB());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+            {
+                DBInitializer dbinit = new DBInitializer();
+                dbinit.InitializeDatabase(new FitnessDB());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

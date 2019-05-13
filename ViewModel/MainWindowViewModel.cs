@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.Model.DBContext;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
