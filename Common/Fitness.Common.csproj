@@ -60,6 +60,7 @@
     <Compile Include="Contents\IAddLanseContent.cs" />
     <Compile Include="Contents\IAddLanseTypeContent.cs" />
     <Compile Include="Contents\IAddUserContent.cs" />
+    <Compile Include="Contents\IHomeContent.cs" />
     <Compile Include="Contents\IMainContent.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />

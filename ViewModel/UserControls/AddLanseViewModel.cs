@@ -14,6 +14,6 @@ namespace ViewModel.UserControls
 
         public RelayCommand CloseTabItemCommand { get; set; }
 
-        public bool ShowCloseButton => false;
+        public bool ShowCloseButton => true;
     }
 }

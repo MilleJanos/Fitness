@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selector="clr-namespace:View.TemplateSelector"
         mc:Ignorable="d" Background="White"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow"  MinHeight="350" MinWidth="525" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -18,71 +18,101 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <ScrollViewer>
-        
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
         <Grid>
 
+            
+            
+            <!-- LOGIN PAGE -->
             <Grid Visibility="{Binding LoginVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                <TextBlock Text="TODO: Login Pange"></TextBlock>
-                
-                <!-- DOTO: Andi -->
-                
-            </Grid>
+                <!-- Title -->
+                <TextBlock Text="Login Pange"></TextBlock>
 
-            <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
+                <!-- Button: Login -->
+                <Button Content="Login"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Command="{Binding LoginCommand}"/>
+
+                <!-- DOTO: Andi -->
+
+            </Grid>
+            
+            
+            
+            <!-- HOME PAGE -->
+            <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   ShowGridLines="True">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Title -->
+                <TextBlock Text="Home" 
+                           FontSize="22"
+                        Grid.Row="1" 
+                        Grid.Column="2"
+                        Grid.ColumnSpan="1"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"> 
+                </TextBlock>
 
-                <StackPanel Grid.Row="1" 
-                            Grid.Column="1"
-                            Orientation="Vertical">
+                <!-- Button: Logout -->
+                <Button Content="Loginout"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Command="{Binding LogoutCommand}">
+                </Button>
 
-                    <TabControl Grid.Row="1"
-                                Grid.Column="1"
-                                ItemsSource="{Binding Contents}"
-                                SelectedItem="{Binding SelectedContent, Mode=TwoWay}"
-                                ContentTemplateSelector="{StaticResource TemplateSelector}">
+                <!-- Main Tab Control -->
+                <TabControl Grid.Row="2"
+                        Grid.Column="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        MinHeight="150"
+                        MinWidth="250"
+                        ItemsSource="{Binding Contents}"
+                        SelectedItem="{Binding SelectedContent, Mode=TwoWay}"
+                        ContentTemplateSelector="{StaticResource TemplateSelector}">
+                </TabControl>
 
-
-                    </TabControl>
-
-                    <!-- Row 1 -->
-                    <TextBlock Text="{Binding PageTitle, Mode=OneWay}" MinWidth="100" Margin="4" FontSize="15" TextAlignment="Center"></TextBlock>
-
-                    <!-- Row 2 -->
-                    <TextBox Text="{Binding PageTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Margin="4" FontSize="15"/>
-
-
-                </StackPanel>
-
-
+                <!-- Button: Close Window -->
                 <Button Grid.Row="3" 
-                        Grid.Column="3" 
-                        Content="Exit" 
-                        VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Right" 
-                        Margin="10" Padding="20 2 20 2" 
-                        Command="{Binding CloseCommand}"/>
-
+                    Grid.Column="3" 
+                    Content="Exit" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" 
+                    Margin="5" Padding="10 2 10 2" 
+                    Command="{Binding CloseCommand}">
+                </Button>
 
             </Grid>
-          
+
+
             
         </Grid>
+        
     </ScrollViewer>
-    
+
 
 </Window>
