@@ -69,7 +69,19 @@
     <Compile Include="UserControls\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Home\UserManager.xaml.cs">
+    <Compile Include="UserControls\EntryManager.xaml.cs">
+      <DependentUpon>EntryManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LanseManager.xaml.cs">
+      <DependentUpon>LanseManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LanseTypeManager.xaml.cs">
+      <DependentUpon>LanseTypeManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\StatManager.xaml.cs">
+      <DependentUpon>StatManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserManager.xaml.cs">
       <DependentUpon>UserManager.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -102,7 +114,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Home\UserManager.xaml">
+    <Page Include="UserControls\EntryManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LanseManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LanseTypeManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\StatManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,9 +140,14 @@
       <Project>{ee19542d-4065-46a9-b01f-93d430ec8af8}</Project>
       <Name>Fitness.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModel\Fitness.ViewModel.csproj">
+      <Project>{B52D2E80-536C-4F50-A7A0-54320AAEBFF3}</Project>
+      <Name>Fitness.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

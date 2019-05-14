@@ -44,7 +44,7 @@ namespace ViewModel.UserControls
 
         private void UserManagerExecute()
         {
-            MainWindowViewModel.Instance.SetNewTab( );
+            MainWindowViewModel.Instance.SetNewTab(new UserManagerViewModel());
         }
 
         private void LanseManagerExecute()

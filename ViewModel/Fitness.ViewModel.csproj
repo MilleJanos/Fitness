@@ -52,7 +52,11 @@
     <Compile Include="UserControls\AddLanseViewModel.cs" />
     <Compile Include="UserControls\AddUserViewModel.cs" />
     <Compile Include="UserControls\HomeViewModel.cs" />
-    <Compile Include="UserControls\home\UserManagerViewModel.cs" />
+    <Compile Include="UserControls\EntryManagerViewModel.cs" />
+    <Compile Include="UserControls\LanseTypeManagerViewModel.cs" />
+    <Compile Include="UserControls\StatManagerViewModel.cs" />
+    <Compile Include="UserControls\UserManagerViewModel.cs" />
+    <Compile Include="UserControls\LanseManagerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,5 +71,6 @@
       <Name>Fitness.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
