@@ -221,5 +221,32 @@ namespace Fitness.ViewModel
         }
 
 
+        //private void OpenTabExecute()
+        //{
+        //    MainWindowViewModel.Instance.Set
+        //}
+
+        public void SetNewTab(  )
+        {
+            // Test if tab is already opened:
+            IMainContent mainContent =
+                this.Contents.FirstOrDefault(c => c is IUserManagerContent) /*as IMainContent*/;
+
+            if(mainContent == null )
+            {
+                // add new tab:
+                UserManagerViewModel umVM = new UserManagerViewModel();
+                //umVM.member = ...;  SET MEMBERS IF NEEDED
+                this.Contents.Add(umVM);
+                this.SelectedContent = this.Contents.LastOrDefault();
+            }
+            else
+            {
+                // show already opened tab:
+                this.SelectedContent = mainContent;
+            }
+
+        }
+
     }
 }

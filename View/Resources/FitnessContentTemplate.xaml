@@ -4,6 +4,10 @@
   xmlns:userControls="clr-namespace:View.UserControls"
   xmlns:types="clr-namespace:Fitness.Common.Contents;assembly=Common">
 
+    <DataTemplate x:Key="HomeTemplate" DataType="{x:Type types:IHomeContent}">
+        <userControls:Home/>
+    </DataTemplate>
+    
     <DataTemplate x:Key="AddLanseTypeTemplate" DataType="{x:Type types:IAddLanseTypeContent}">
         <userControls:AddLanseType/>
     </DataTemplate>
@@ -15,5 +19,6 @@
     <DataTemplate x:Key="AddUserTemplate" DataType="{x:Type types:IAddUserContent}">
         <userControls:AddUser/>
     </DataTemplate>
-
+    
+    
 </ResourceDictionary>

@@ -52,7 +52,7 @@
     <Compile Include="UserControls\AddLanseViewModel.cs" />
     <Compile Include="UserControls\AddUserViewModel.cs" />
     <Compile Include="UserControls\HomeViewModel.cs" />
-    <Compile Include="UserControls\UserManagerViewModel.cs" />
+    <Compile Include="UserControls\home\UserManagerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

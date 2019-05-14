@@ -45,8 +45,7 @@
             <!-- HOME PAGE -->
             <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
                    HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch"
-                   ShowGridLines="True">
+                   VerticalAlignment="Stretch">
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>

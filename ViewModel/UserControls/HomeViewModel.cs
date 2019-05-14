@@ -1,5 +1,6 @@
-﻿using Common.Contents;
+﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace ViewModel.UserControls
 {
-    public class HomeViewModel : IHomeContent
+    public class HomeViewModel : ViewModelBase, IHomeContent
     {
         public RelayCommand EntryManager { get; private set; }
         public RelayCommand UserManager { get; private set; }
         public RelayCommand LanseManager { get; private set; }
         public RelayCommand LanseTypeManager { get; private set; }
+        public RelayCommand StatisticsManager { get; private set; }
 
   
         public HomeViewModel()
@@ -22,6 +24,7 @@ namespace ViewModel.UserControls
             this.UserManager = new RelayCommand(this.UserManagerExecute);
             this.LanseManager = new RelayCommand(this.LanseManagerExecute);
             this.LanseTypeManager = new RelayCommand(this.LanseTypeManagerCanExecute);
+            this.StatisticsManager = new RelayCommand(this.StatisticsManagerCanExecute);
         } 
 
 
@@ -41,7 +44,7 @@ namespace ViewModel.UserControls
 
         private void UserManagerExecute()
         {
-            // TODO: Open Add user page to Tab
+            MainWindowViewModel.Instance.SetNewTab( );
         }
 
         private void LanseManagerExecute()
@@ -58,6 +61,19 @@ namespace ViewModel.UserControls
         }
 
         private void LanseTypeManagerExecute()
+        {
+            // TODO: Open Add lanse_type page to Tab
+        }
+
+        private void StatisticsManagerCanExecute()
+        {
+            if ( true /* TODO: Jancsi - Is admin ?*/)
+            {
+                StatisticsManagerExecute();
+            }
+        }
+
+        private void StatisticsManagerExecute()
         {
             // TODO: Open Add lanse_type page to Tab
         }

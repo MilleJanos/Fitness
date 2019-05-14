@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.Common.Contents
 {
-    public interface IHomeContent : IMainContent
+    public interface IUserManagerContent : IMainContent
     {
     }
 }

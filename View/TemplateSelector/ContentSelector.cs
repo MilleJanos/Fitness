@@ -14,7 +14,12 @@ namespace View.TemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if ( item is IAddUserContent )
+
+            if ( item is IHomeContent )
+            {
+                return System.Windows.Application.Current.MainWindow.TryFindResource("HomeTemplate") as DataTemplate;
+            }
+            else if ( item is IAddUserContent )
             {
                 return System.Windows.Application.Current.MainWindow.TryFindResource("AddUserTemplate") as DataTemplate;
             }
@@ -27,8 +32,10 @@ namespace View.TemplateSelector
                 return System.Windows.Application.Current.MainWindow.TryFindResource("AddLanseTypeTemplate") as DataTemplate;
             }
             else
-
+            {
                 return null;
+            }
+                               
         }
     }
 }
