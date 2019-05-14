@@ -32,6 +32,7 @@ namespace Fitness.ViewModel
         private string _pageTitle = "MainPage";
         private ObservableCollection<IMainContent> _contents;
         private IMainContent _selectedContent;
+        private IMainContent _prevSelectedContent;
 
 
         public MainWindowViewModel()
@@ -198,7 +199,21 @@ namespace Fitness.ViewModel
             }
             set
             {
+                PrevSelectedContent = _selectedContent;
                 _selectedContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public IMainContent PrevSelectedContent
+        {
+            get
+            {
+                return _prevSelectedContent;
+            }
+            set
+            {
+                _prevSelectedContent = value;
                 RaisePropertyChanged();
             }
         }
@@ -231,19 +246,55 @@ namespace Fitness.ViewModel
             
             IMainContent mainContent = null;
 
-            if ( content is IUserManagerContent )
+            if ( content is IEntryManagerContent )
             {
                 // Test if tab is already opened:
-                mainContent = this.Contents.FirstOrDefault(c => c is IUserManagerContent) /*as IMainContent*/;
+                mainContent = this.Contents.FirstOrDefault(c => c is IEntryManagerContent);
+                // Set Tab:
+                EntryManagerViewModel vm = new EntryManagerViewModel();
+                SetTab(mainContent, vm);
+
+            } else if ( content is IUserManagerContent )
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IUserManagerContent);
+                // Set Tab:
+                UserManagerViewModel vm = new UserManagerViewModel();
+                SetTab(mainContent, vm);
+
+            } else if ( content is ILanseManagerContent )
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is ILanseManagerContent);
+                // Set Tab:
+                LanseManagerViewModel vm = new LanseManagerViewModel();
+                SetTab(mainContent, vm);
+
+            } else if ( content is ILanseTypeManagerContent )
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is ILanseTypeManagerContent);
+                // Set Tab:
+                LanseTypeManagerViewModel vm = new LanseTypeManagerViewModel();
+                SetTab(mainContent, vm);
+
+            } else if ( content is IStatManagerContent )
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IStatManagerContent);
+                // Set Tab:
+                StatManagerViewModel vm = new StatManagerViewModel();
+                SetTab(mainContent, vm);
 
             }
 
-            if(mainContent == null )
+        }
+
+        public void SetTab( IMainContent mainContent, IMainContent viewModel )
+        {
+            if ( mainContent == null )
             {
-                // add new tab:
-                UserManagerViewModel vm = new UserManagerViewModel();
-                //vm.member = ...;  SET MEMBERS IF NEEDED
-                this.Contents.Add(vm);
+                this.Contents.Add(viewModel);
                 this.SelectedContent = this.Contents.LastOrDefault();
             }
             else
@@ -251,7 +302,22 @@ namespace Fitness.ViewModel
                 // show already opened tab:
                 this.SelectedContent = mainContent;
             }
+        }
 
+        //
+        // Close Tab:
+        //
+
+        public void CloseTabItem(IMainContent content)
+        {
+            if ( content != null )
+            {
+                // before closing, open prev. tab
+                this.SelectedContent = PrevSelectedContent; //this.Contents.FirstOrDefault();
+
+                // close this tab
+                this.Contents.Remove(content);
+            }
         }
 
     }

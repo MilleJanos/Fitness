@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,12 @@ namespace ViewModel
         private int _price;
         private string _description;
         private Boolean _active;
+
+        public AddLanseTypeViewModel()
+        {
+            this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
+
+        }
 
 
         public String Name
@@ -74,5 +81,11 @@ namespace ViewModel
         public RelayCommand CloseTabItemCommand { get; set; }
 
         public bool ShowCloseButton => true;
+
+
+        public void CloseTabItemExecute()
+        {
+            MainWindowViewModel.Instance.CloseTabItem(this);
+        }
     }
 }

@@ -1,17 +1,17 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:userControls="clr-namespace:Fitness.Common.Contents;assembly=Common"
+  xmlns:userControls="clr-namespace:View.UserControls"
   xmlns:types="clr-namespace:Fitness.Common.Contents;assembly=Common">
 
-    
+
     <DataTemplate x:Key="HomeTemplate" DataType="{x:Type types:IHomeContent}">
         <userControls:Home/>
     </DataTemplate>
 
 
     <DataTemplate x:Key="EntryManagerTemplate" DataType="{x:Type types:IEntryManagerContent}">
-        <userControls:E/>
+        <userControls:EntryManager/>
     </DataTemplate>
 
     <DataTemplate x:Key="UserManagerTemplate" DataType="{x:Type types:IUserManagerContent}">
@@ -30,7 +30,7 @@
         <userControls:StatManager/>
     </DataTemplate>
 
-    
+
     <DataTemplate x:Key="AddLanseTypeTemplate" DataType="{x:Type types:IAddLanseTypeContent}">
         <userControls:AddLanseType/>
     </DataTemplate>
@@ -42,6 +42,6 @@
     <DataTemplate x:Key="AddUserTemplate" DataType="{x:Type types:IAddUserContent}">
         <userControls:AddUser/>
     </DataTemplate>
-    
-    
+
+
 </ResourceDictionary>

@@ -1,5 +1,4 @@
 ﻿using Fitness.Common.Contents;
-using Fitness.Common.Contents.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace View.TemplateSelector
             // HOME:
             else if ( item is IEntryManagerContent )
             {
-                return System.Windows.Application.Current.MainWindow.TryFindResource("EntryTemplate") as DataTemplate;
+                return System.Windows.Application.Current.MainWindow.TryFindResource("EntryManagerTemplate") as DataTemplate;
             }
             else if ( item is IUserManagerContent )
             {

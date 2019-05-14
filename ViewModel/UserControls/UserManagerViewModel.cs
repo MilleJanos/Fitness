@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,9 @@ namespace ViewModel.UserControls
     {
 
 
-
         public UserManagerViewModel()
         {
-
+            this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
         }
 
 
@@ -24,5 +24,11 @@ namespace ViewModel.UserControls
         public RelayCommand CloseTabItemCommand { get; set; }
 
         public bool ShowCloseButton => true;
+
+        public void CloseTabItemExecute()
+        {
+            MainWindowViewModel.Instance.CloseTabItem(this);
+        }
+
     }
 }

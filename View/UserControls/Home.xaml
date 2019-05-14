@@ -24,7 +24,9 @@
                     Margin="20"
                     Padding="5"
                     MinWidth="100"
-                    MaxWidth="200"
+                    MinHeight="50"
+                    MaxWidth="300"
+                    FontSize="20"
                     Command="{Binding EntryManager}">
             </Button>
 
@@ -33,7 +35,9 @@
                     Margin="20"
                     Padding="5"
                     MinWidth="100"
-                    MaxWidth="200"
+                    MinHeight="50"
+                    MaxWidth="300"
+                    FontSize="20"
                     Command="{Binding UserManager}">
             </Button>
 
@@ -42,7 +46,9 @@
                     Margin="20"
                     Padding="5"
                     MinWidth="100"
-                    MaxWidth="200"
+                    MinHeight="50"
+                    MaxWidth="300"
+                    FontSize="20"
                     Command="{Binding LanseManager}">
             </Button>
 
@@ -51,7 +57,9 @@
                     Margin="20"
                     Padding="5"
                     MinWidth="100"
-                    MaxWidth="200"
+                    MinHeight="50"
+                    MaxWidth="300"
+                    FontSize="20"
                     Command="{Binding LanseTypeManager}">
         </Button>
 
@@ -60,7 +68,9 @@
                     Margin="20"
                     Padding="5"
                     MinWidth="100"
-                    MaxWidth="200"
+                    MinHeight="50"
+                    MaxWidth="300"
+                    FontSize="20"
                     Command="{Binding StatisticsManager}">
         </Button>
 

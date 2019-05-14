@@ -45,47 +45,26 @@
             <!-- HOME PAGE -->
             <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
                    HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch">
+                   VerticalAlignment="Stretch"
+                   ShowGridLines="False">
                 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Title -->
-                <TextBlock Text="Home" 
-                           FontSize="22"
-                        Grid.Row="1" 
-                        Grid.Column="2"
-                        Grid.ColumnSpan="1"
-                        TextAlignment="Center"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"> 
-                </TextBlock>
-
-                <!-- Button: Logout -->
-                <Button Content="Loginout"
-                    Grid.Row="1" 
-                    Grid.Column="1"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Command="{Binding LogoutCommand}">
-                </Button>
-
                 <!-- Main Tab Control -->
-                <TabControl Grid.Row="2"
-                        Grid.Column="2"
+                <TabControl Grid.Row="1"
+                        Grid.Column="1"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         MinHeight="150"
@@ -95,15 +74,29 @@
                         ContentTemplateSelector="{StaticResource TemplateSelector}">
                 </TabControl>
 
-                <!-- Button: Close Window -->
-                <Button Grid.Row="3" 
-                    Grid.Column="3" 
-                    Content="Exit" 
-                    VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Right" 
-                    Margin="5" Padding="10 2 10 2" 
-                    Command="{Binding CloseCommand}">
-                </Button>
+                <StackPanel Grid.Row="2" 
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                  
+                    <!-- Button: Logout -->
+                    <Button Content="Logout"
+                        Grid.Row="3" 
+                        Grid.Column="1"
+                        Command="{Binding LogoutCommand}">
+                    </Button>
+                
+                    <!-- Button: Close Window -->
+                    <Button Grid.Row="3" 
+                        Grid.Column="3" 
+                        Content="Exit" 
+                        Margin="5" Padding="10 2 10 2" 
+                        Command="{Binding CloseCommand}">
+                    </Button>
+                    
+                </StackPanel>
 
             </Grid>
 

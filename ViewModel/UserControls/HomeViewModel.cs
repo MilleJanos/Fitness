@@ -39,7 +39,7 @@ namespace ViewModel.UserControls
         // Commands:
         private void EntryManagerExecute()
         {
-            // TODO: Open Add entry page to Tab
+            MainWindowViewModel.Instance.SetNewTab(new EntryManagerViewModel());
         }
 
         private void UserManagerExecute()
@@ -49,7 +49,7 @@ namespace ViewModel.UserControls
 
         private void LanseManagerExecute()
         {
-            // TODO: Open Add lanse page to Tab
+            MainWindowViewModel.Instance.SetNewTab(new LanseManagerViewModel());
         }
 
         private void LanseTypeManagerCanExecute()
@@ -62,7 +62,7 @@ namespace ViewModel.UserControls
 
         private void LanseTypeManagerExecute()
         {
-            // TODO: Open Add lanse_type page to Tab
+            MainWindowViewModel.Instance.SetNewTab(new LanseTypeManagerViewModel());
         }
 
         private void StatisticsManagerCanExecute()
@@ -75,9 +75,8 @@ namespace ViewModel.UserControls
 
         private void StatisticsManagerExecute()
         {
-            // TODO: Open Add lanse_type page to Tab
+            MainWindowViewModel.Instance.SetNewTab(new StatManagerViewModel());
         }
-
 
     }
 }
