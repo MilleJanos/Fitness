@@ -4,9 +4,132 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.UserControls"
+             xmlns:converters="clr-namespace:Fitness.Common.Converters;assembly=Common"
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+    </UserControl.Resources>
+
+
     <Grid>
-        <TextBlock Text="UserManager View" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 - Title -->
+        <TextBlock Text="Search" 
+                    Grid.Row="0"
+                       VerticalAlignment="Center" 
+                       Margin="1" 
+                       TextAlignment="Center" 
+                       FontSize="16">
+        </TextBlock>
+
+        <!-- Row 2 - Search -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            
+            <!-- Column 1 -->
+            <StackPanel Margin="10,0,10,0">
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="First Name" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="LastName" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Role" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <ComboBox MinWidth="100" Margin="5"></ComboBox>
+                </StackPanel>
+                
+            </StackPanel>
+
+            <!-- Column 2 -->
+            <StackPanel Margin="10,0,10,0">
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Barcode" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Email" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Birth Date" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <DatePicker MinWidth="100" Margin="5"></DatePicker>
+                </StackPanel>
+
+            </StackPanel>
+
+            <!-- Column 3 -->
+            <StackPanel Margin="10,0,10,0">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="..." Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="..." Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Registration Date" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <DatePicker MinWidth="100" Margin="5"></DatePicker>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Row 3 - Data grid -->
+        <DataGrid Grid.Row="2"
+            Margin="5" 
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding SelectedUser}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
+
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ItemClickCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Width="*" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Barcode" Width="*" Binding="{Binding Barcode}"/>
+                <DataGridTextColumn Header="Birth Date" Width="*" Binding="{Binding BirthDate}"/>
+                <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Phone number" Width="*" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Role" Width="*" Binding="{Binding Role}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
+                        Converter={StaticResource DataGridRowNumberConverter}}"
+                        Margin="2,0,2,0"/>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+
+        </DataGrid>
+        
     </Grid>
 </UserControl>

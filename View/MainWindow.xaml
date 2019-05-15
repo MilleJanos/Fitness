@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selector="clr-namespace:View.TemplateSelector"
         mc:Ignorable="d" Background="White"
-        Title="MainWindow"  MinHeight="350" MinWidth="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow"  MinHeight="350" MinWidth="325" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>

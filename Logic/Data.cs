@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Fitness.Logic
 {
-    public class Data
+    public static class Data
     {
-        public static FitnessController Fitness { get; }
+
+        public static FitnessController FitnessC { get; } // only the constructor can set it
 
         static Data()
         {
-            Fitness = new FitnessController();
+            FitnessC = new FitnessController();
         }
+
+
     }
 }
