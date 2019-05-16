@@ -4,14 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.UserControls"
+             xmlns:selector="clr-namespace:View.TemplateSelector"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:Fitness.Common.Converters;assembly=Common"
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
 
-
     <UserControl.Resources>
-        <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+        
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+        </ResourceDictionary>
+
     </UserControl.Resources>
+
 
 
     <Grid>
@@ -41,39 +51,49 @@
             <StackPanel Margin="10,0,10,0">
                 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="First Name" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                    <TextBlock Text="First name" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="LastName" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                    <TextBlock Text="Last name" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Role" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <ComboBox MinWidth="100" Margin="5"></ComboBox>
+                    <ComboBox MinWidth="100" Margin="5"
+                              ItemsSource="{Binding Filter_Roles}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Filter_SelectedRoleStrId, Mode=TwoWay}"
+                              SelectedValuePath="StringId">
+                    </ComboBox>
                 </StackPanel>
-                
-            </StackPanel>
 
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Show Inactives" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <CheckBox IsChecked="{Binding ShowInactives}" VerticalAlignment="Center"></CheckBox>
+                </StackPanel>
+            </StackPanel>
+            
             <!-- Column 2 -->
             <StackPanel Margin="10,0,10,0">
                 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Barcode" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_Barcode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Email" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Birth Date" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <DatePicker MinWidth="100" Margin="5"></DatePicker>
+                    <TextBlock Text="Phone number" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
+                
 
             </StackPanel>
 
@@ -81,18 +101,25 @@
             <StackPanel Margin="10,0,10,0">
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="..." Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
+                    <TextBlock Text="Birth date" Margin="5" MinWidth="50" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker MinWidth="100" Margin="5"
+                                SelectedDate="{Binding
+                                    Path=Filter_BirthDate,
+                                    Mode=TwoWay,
+                                    TargetNullValue={x:Static System:DateTime.Now}}">
+                    </DatePicker>
+                    <Button Content="clear" Command="{Binding ClearBirthDateCommand}"></Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="..." Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <TextBox MinWidth="100" Margin="5"></TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Registration Date" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
-                    <DatePicker MinWidth="100" Margin="5"></DatePicker>
+                    <TextBlock Text="Registration date" Margin="5" MinWidth="50" TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
+                    <DatePicker MinWidth="100" Margin="5"
+                                SelectedDate="{Binding
+                                    Path=Filter_RegistrationDate,
+                                    Mode=TwoWay,
+                                    TargetNullValue={x:Static System:DateTime.Now}}">
+                    </DatePicker>
+                    <Button Content="clear" Command="{Binding ClearRegistrationDateCommand}"></Button>
                 </StackPanel>
 
             </StackPanel>
@@ -118,6 +145,7 @@
                 <DataGridTextColumn Header="Birth Date" Width="*" Binding="{Binding BirthDate}"/>
                 <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
                 <DataGridTextColumn Header="Phone number" Width="*" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Registration date" Width="*" Binding="{Binding RegistrationDate}"/>
                 <DataGridTextColumn Header="Role" Width="*" Binding="{Binding Role}"/>
             </DataGrid.Columns>
 
@@ -131,5 +159,12 @@
 
         </DataGrid>
         
+        <!-- Error Message -->
+        <TextBlock Grid.Row="2"
+                   Text="No search result" Visibility="{Binding EmptyDataGridMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+        </TextBlock>
+
     </Grid>
 </UserControl>

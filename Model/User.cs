@@ -42,6 +42,9 @@ namespace Fitness.Model
         //[StringLength(maximumLength: 50, MinimumLength = 1)]
         public string Role { get; set; }
 
+        public DateTime RegistrationDate { get; set; }
+
+        public bool Active { get; set; }
 
     }
 }

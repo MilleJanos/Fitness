@@ -13,6 +13,8 @@
 
         public virtual DbSet<User> User { get; set; }
 
+        public virtual DbSet<Role> Role { get; set; }
+
         public virtual DbSet<Lanse> Lanse { get; set; }
 
         public virtual DbSet<LanseType> LanseType { get; set; }

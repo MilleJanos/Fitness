@@ -15,13 +15,10 @@ namespace Fitness.Model
         public int Id { get; set; }
 
         [NotMapped]
-        public User User { get; set; }
+        public Lanse Lanse { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
-        //[StringLength(maximumLength: 1000, MinimumLength = 3)]
-        public string Barcode { get; set; }
+        public int LanseId { get; set; }
 
         public DateTime Date { get; set; }
 

@@ -65,6 +65,7 @@
                 <!-- Main Tab Control -->
                 <TabControl Grid.Row="1"
                         Grid.Column="1"
+                        KeyboardNavigation.IsTabStop="False"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         MinHeight="150"

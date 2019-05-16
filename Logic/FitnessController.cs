@@ -24,5 +24,11 @@ namespace Fitness.Logic
             return fitnessDatabase.User.ToList();
         }
 
+        public List<Role> GetRoles()
+        {
+            return fitnessDatabase.Role.ToList();
+        }
+
+
     }
 }

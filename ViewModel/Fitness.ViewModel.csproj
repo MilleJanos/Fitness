@@ -55,6 +55,7 @@
     <Compile Include="UserControls\EntryManagerViewModel.cs" />
     <Compile Include="UserControls\LanseTypeManagerViewModel.cs" />
     <Compile Include="UserControls\StatManagerViewModel.cs" />
+    <Compile Include="UserControls\UserInfoViewModel.cs" />
     <Compile Include="UserControls\UserManagerViewModel.cs" />
     <Compile Include="UserControls\LanseManagerViewModel.cs" />
   </ItemGroup>

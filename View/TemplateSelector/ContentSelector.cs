@@ -40,6 +40,11 @@ namespace View.TemplateSelector
             {
                 return System.Windows.Application.Current.MainWindow.TryFindResource("StatManagerTemplate") as DataTemplate;
             }
+            // User Info
+            else if ( item is IUserInfoContent )
+            {
+                return System.Windows.Application.Current.MainWindow.TryFindResource("UserInfoTemplate") as DataTemplate;
+            }
             // MANAGER:
             else if ( item is IAddUserContent )
             {

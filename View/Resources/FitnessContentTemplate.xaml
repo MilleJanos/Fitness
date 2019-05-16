@@ -31,6 +31,11 @@
     </DataTemplate>
 
 
+    <DataTemplate x:Key="UserInfoTemplate" DataType="{x:Type types:IUserInfoContent}">
+        <userControls:UserInfo/>
+    </DataTemplate>
+
+
     <DataTemplate x:Key="AddLanseTypeTemplate" DataType="{x:Type types:IAddLanseTypeContent}">
         <userControls:AddLanseType/>
     </DataTemplate>
@@ -42,6 +47,5 @@
     <DataTemplate x:Key="AddUserTemplate" DataType="{x:Type types:IAddUserContent}">
         <userControls:AddUser/>
     </DataTemplate>
-
 
 </ResourceDictionary>

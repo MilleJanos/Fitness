@@ -16,12 +16,12 @@ namespace Fitness.Model
         public string Name { get; set; }
 
         //[StringLength(maximumLength: 100, MinimumLength = 3)]
-        public int ActiveDays { get; set; }
+        public string ActiveDays { get; set; }
 
         public int ActivePerDay { get; set; }
 
         //[StringLength(maximumLength: 250, MinimumLength = 3)]
-        public int ActiveHours { get; set; }
+        public int ActiveHoursPerDay { get; set; }
 
         public int Price { get; set; }
 

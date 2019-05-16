@@ -287,6 +287,15 @@ namespace Fitness.ViewModel
                 SetTab(mainContent, vm);
 
             }
+            else if ( content is IUserInfoContent )
+            {
+                // Test if tab is already opened: (Only if the user is the same too)
+                mainContent = this.Contents.FirstOrDefault(c => c is IUserInfoContent && (c as IUserInfoContent).Header.Equals(content.Header));
+                // Set Tab:
+                UserInfoViewModel vm = new UserInfoViewModel();
+                SetTab(mainContent, vm);
+
+            }
 
         }
 

@@ -16,6 +16,8 @@ namespace Fitness.Model
         [NotMapped]
         public LanseType Type { get; set; }
 
+        public int UserId { get; set; }
+
         [Required]
         public int TypeId { get; set; }
 

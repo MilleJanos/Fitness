@@ -66,6 +66,7 @@
     <Compile Include="Contents\IAddUserContent.cs" />
     <Compile Include="Contents\IHomeContent.cs" />
     <Compile Include="Contents\IMainContent.cs" />
+    <Compile Include="Contents\IUserInfoContent.cs" />
     <Compile Include="Contents\IUserManagerContent.cs" />
     <Compile Include="Converters\DataGridRowNumberConverter.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
