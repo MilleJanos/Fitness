@@ -164,7 +164,7 @@ namespace Fitness.ViewModel
             {
                 if(LoginPassword == null)
                 {
-                    MessageBox.Show(" kapd be!!!!!!!!!!!!!? miert nem irtal jelszot? azt hiszed kitalalom magamtol? ");
+                    MessageBox.Show(" TeEEEeee!!!!!!!!!!!!!? miert nem irtal jelszot? azt hiszed kitalalom magamtol? ");
                     return;
                 }
                 string hashedstrpassword = LoginPassword.GetHashCode().ToString();
@@ -177,7 +177,7 @@ namespace Fitness.ViewModel
 
                 else
                 {
-                    MessageBox.Show(" kapd be!!!!!!!!!!!!!? nem tudod a jelszot? ");
+                    MessageBox.Show(" TEeee!!!!!!!!!!!!!? nem tudod a jelszot? ");
                 }
                 
             }
@@ -202,15 +202,19 @@ namespace Fitness.ViewModel
             if( true /* TODO: Jancsi */)
             {
                 LogoutCommandExecute();
+                
             }
         }
 
         public void LogoutCommandExecute()
         {
 
-            /* TODO: Jancsi - Logging out methods */
-
+            /* TODO: Andi - Logging out methods */
+            LoginEmail = null;
+            LoginPassword = null;
+            LoggedInUser = null;
             ShowLoginPage();
+            
 
         }
 
@@ -222,6 +226,9 @@ namespace Fitness.ViewModel
         public void CloseCommandExecute()
         {
             ViewService.CloseDialog(this);
+            
+           
+
         }
 
         public string PageTitle
@@ -352,6 +359,15 @@ namespace Fitness.ViewModel
                 mainContent = this.Contents.FirstOrDefault(c => c is IUserInfoContent && (c as IUserInfoContent).Header.Equals(content.Header));
                 // Set Tab:
                 UserInfoViewModel vm = new UserInfoViewModel();
+                SetTab(mainContent, vm);
+
+            }
+            else if (content is IAddUserContent)
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IAddUserContent);
+                // Set Tab:
+                AddUserViewModel vm = new AddUserViewModel();
                 SetTab(mainContent, vm);
 
             }

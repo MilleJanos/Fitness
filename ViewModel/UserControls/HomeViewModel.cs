@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ViewModel.UserControls
 {
@@ -54,9 +55,13 @@ namespace ViewModel.UserControls
 
         private void LanseTypeManagerCanExecute()
         {
-            if( true /* TODO: Jancsi - Is admin ?*/)
+            if (MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") /* TODO: Andi - Is admin ?*/)
             {
                 LanseTypeManagerExecute();
+            }
+            else
+            {
+                MessageBox.Show("Admin right required");
             }
         }
 
@@ -67,9 +72,13 @@ namespace ViewModel.UserControls
 
         private void StatisticsManagerCanExecute()
         {
-            if ( true /* TODO: Jancsi - Is admin ?*/)
+            if (MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") /* TODO: Andi - Is admin ?*/)
             {
                 StatisticsManagerExecute();
+            }
+            else
+            {
+                MessageBox.Show("Admin right required");
             }
         }
 
