@@ -36,13 +36,21 @@
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1"
                     Grid.Column="1"
                     Orientation="Vertical">
- 
+
+            <!-- Row 0 -->
+            <TextBlock Text="{Binding ErrorMessage}" 
+                       Margin="25,0,0,0" FontSize="15" 
+                       Visibility="{Binding ErrorMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
+            </TextBlock>
+     
+
             <!-- Row 1 -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="User identifier:"></TextBlock>
@@ -71,7 +79,7 @@
             Height="150" 
             Width="150">
         </Image>
-        
+
         <StackPanel Grid.Row="2"
                     Grid.Column="1"
                     Orientation="Vertical">
@@ -83,22 +91,26 @@
             </StackPanel>
 
             <!-- Row 6 -->
-            <DataGrid Grid.Row="2"
-                Margin="5" 
-                ItemsSource="{Binding Lanses}"
-                SelectedItem="{Binding SelectedLanses}"
-                AutoGenerateColumns="False"
-                IsReadOnly="True">
+            <TextBlock Text="Lanses" Margin="0,25,0,0"></TextBlock>
+            <DataGrid   Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="5" 
+                        ItemsSource="{Binding Lanses}"
+                        SelectedItem="{Binding SelectedLanses}"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True">
 
                 <DataGrid.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ItemClickCommand}"/>
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Type.Name}"/>
+                    <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Type}"/>
                     <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}"/>
                     <DataGridTextColumn Header="Etart Date" Width="*" Binding="{Binding EndDate}"/>
                     <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Active" Width="*" Binding="{Binding Active}"/>
                 </DataGrid.Columns>
 
                 <DataGrid.RowHeaderTemplate>
@@ -113,5 +125,25 @@
 
 
         </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="3"
+                    Grid.RowSpan="2"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center">
+
+            <Button Content="Edit" 
+                    Command="{Binding EditUserCommand}"
+                    MaxWidth="100">
+                
+            </Button>
+
+            <Button Content="Delete" 
+                    Command="{Binding DeleteUserCommand}"
+                    MaxWidth="100">
+            </Button>
+            
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -92,21 +92,21 @@ namespace ViewModel.UserControls
         public List<User> FirstName_Filter(string firstname, List<User> users)
         {
             if ( firstname != "" && firstname != null )
-                return users.Where(u => u.FirstName.Contains(firstname)).ToList();
+                return users.Where(u => u.FirstName.ToLower().Contains(firstname.ToLower())).ToList();
             return users;
         }
 
         public List<User> LastName_Filter(string lastname, List<User> users)
         {
             if ( lastname != "" && lastname != null )
-                return users.Where(u => u.LastName.Contains(lastname)).ToList();
+                return users.Where(u => u.LastName.ToLower().Contains(lastname.ToLower())).ToList();
             return users;
         }
 
         public List<User> Email_Filter(string email, List<User> users)
         {
             if ( email != "" && email != null )
-                return users.Where(u => u.Email.Contains(email)).ToList();
+                return users.Where(u => u.Email.ToLower().Contains(email.ToLower())).ToList();
             return users;
         }
 
@@ -158,6 +158,7 @@ namespace ViewModel.UserControls
         {
             EmptyDataGridMessageVisibility = false;
             Users = GetAllUsers();
+
             Users = Role_Filter( Filter_SelectedRoleStrId, Users );
             Users = ShowInactive_Filter( ShowInactives, Users );
             Users = FirstName_Filter( Filter_FirstName, Users );
@@ -167,6 +168,7 @@ namespace ViewModel.UserControls
             Users = PhoneNumber_Filter( Filter_PhoneNumber, Users );
             Users = BirthDate_Filter( Filter_BirthDate, Users );
             Users = RegistrationDate_Filter( Filter_RegistrationDate, Users );
+
             if ( Users.Count == 0 )
             {
                 EmptyDataGridMessageVisibility = true;

@@ -12,6 +12,8 @@ namespace ViewModel.UserControls
 {
     public class UserInfoViewModel : ViewModelBase, IUserInfoContent
     {
+        public static UserInfoViewModel Instance;
+
         private User CurrentUser; 
         private int _userId;
         private string _userBarcode;
@@ -20,30 +22,55 @@ namespace ViewModel.UserControls
         private string _userOtherInformations;
         private List<Lanse> _lanses;
 
+        private string _errorMessage;
+        private bool _errorMessageVisibility;
+
+        private RelayCommand EditUserCommand;
+        private RelayCommand DeleteUserCommand;
+        
         public UserInfoViewModel()
         {
+            Instance = this;
+
             CurrentUser = UserManagerViewModel.LastSelectedUser;
             _userId = CurrentUser.Id;
             _userBarcode = CurrentUser.Barcode;
             _userName = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            UserOtherInformations = (CurrentUser.OtherInformations.Equals("")) 
+                    ? "No information." 
+                    : CurrentUser.OtherInformations;
+
             if( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
             {
-                UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
+                //UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
+                UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
+
             }
             else
             {
                 UserProfileImagePath = @"/View;component/Resources/" + CurrentUser.Image;
             }
+
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
+            this.EditUserCommand = new RelayCommand(this.EditUserExecute);
+            this.DeleteUserCommand = new RelayCommand(this.DeleteUserExecute);
 
             // Get All Lanses belongs to the current user
             List<Lanse> temp = GetAllLanses();
-            Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
-            //
-            // TODO
-            //
-            //string name = Lanses.ElementAt(0).Type.Name;
+            Lanses = temp.Where(l => l.UserId == CurrentUser.Id).ToList();
 
+            //string name = Lanses.ElementAt(0).Type.Name;  
+
+            // Show message if user is Invisible (user.Active == false):
+            ErrorMessage = "User is Inactive!";
+            if( CurrentUser.Active )
+            {
+                ErrorMessageVisibility = false;
+            }
+            else
+            {
+                ErrorMessageVisibility = true;
+            }
         }
 
         public string Header => "User Info: " + CurrentUser.FirstName + " " + CurrentUser.LastName;
@@ -118,10 +145,37 @@ namespace ViewModel.UserControls
             }
         }
 
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            private set
+            {
+                _errorMessage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool ErrorMessageVisibility
+        {
+            get
+            {
+                return _errorMessageVisibility;
+            }
+            private set
+            {
+                _errorMessageVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public List<Lanse> GetAllLanses()
         {
             return Fitness.Logic.Data.FitnessC.GetLanses();
         }
+
 
         public List<Lanse> Lanses
         {
@@ -139,6 +193,19 @@ namespace ViewModel.UserControls
         public void CloseTabItemExecute()
         {
             MainWindowViewModel.Instance.CloseTabItem(this);
+        }
+
+        public void EditUserExecute()
+        {
+            // Save current user:
+            MainWindowViewModel.Instance.UserInfoToEditUserHelper = CurrentUser;
+            MainWindowViewModel.Instance.SetNewTab(new EditUserViewModel());
+        }
+
+        public void DeleteUserExecute()
+        {
+            // TODO: MAKE THIS USER Invisible:  User.Active = false;
+            
         }
 
     }

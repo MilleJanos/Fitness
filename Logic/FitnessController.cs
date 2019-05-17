@@ -34,6 +34,17 @@ namespace Fitness.Logic
             return fitnessDatabase.Lanse.ToList();
         }
 
+        public void UpdateUser(int user_id, User user)
+        {
+            User result = ( from u in fitnessDatabase.User
+                            where u.Id == user_id
+                            select u ).SingleOrDefault();
+
+            result = user;
+
+            fitnessDatabase.SaveChanges();
+
+        }
 
     }
 }

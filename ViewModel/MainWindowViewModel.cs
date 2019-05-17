@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.Model;
 using Fitness.Model.DBContext;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Fitness.ViewModel
     {
         // Common:
         public static MainWindowViewModel Instance { get; private set; }
+        public static User _userInfoToEditUserHelper = null;    // Used to help pass User object from UserInfo to EditUser
 
         private bool _loginVisibility;
         private bool _homeVisibility;
@@ -34,6 +36,7 @@ namespace Fitness.ViewModel
         private IMainContent _selectedContent;
         private IMainContent _prevSelectedContent;
 
+        
 
         public MainWindowViewModel()
         {
@@ -235,6 +238,19 @@ namespace Fitness.ViewModel
             SelectedContent = Contents.First();
         }
 
+        public User UserInfoToEditUserHelper
+        {
+            get
+            {
+                return _userInfoToEditUserHelper;
+            }
+            set
+            {
+                _userInfoToEditUserHelper = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         //private void OpenTabExecute()
         //{
@@ -295,6 +311,14 @@ namespace Fitness.ViewModel
                 UserInfoViewModel vm = new UserInfoViewModel();
                 SetTab(mainContent, vm);
 
+            }
+            else if ( content is IEditUserContent )
+            {
+                // Test if tab is already opened: (Only if the user is the same too)
+                mainContent = this.Contents.FirstOrDefault(c => c is IEditUserContent && (c as IEditUserContent).Header.Equals(content.Header));
+                // Set Tab:
+                EditUserViewModel vm = new EditUserViewModel();
+                SetTab(mainContent, vm);
             }
 
         }
