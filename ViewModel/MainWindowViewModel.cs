@@ -18,18 +18,30 @@ namespace Fitness.ViewModel
     {
         // Common:
         public static MainWindowViewModel Instance { get; private set; }
+        //onmga tarolja az informaciookat onmagaban
 
         private bool _loginVisibility;
         private bool _homeVisibility;
 
         // Login:
         public RelayCommand LoginCommand { get; private set; }
-        private string loginUSerName;
+        private User loggedInUser;
 
-        public string LoginUserName
+
+        public User LoggedInUser
         {
-            get { return loginUSerName; }
-            set { loginUSerName = value;
+            get { return loggedInUser; }
+            set { loggedInUser = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string loginEmail;
+
+        public string LoginEmail
+        {
+            get { return loginEmail; }
+            set { loginEmail = value;
                 RaisePropertyChanged();
             }
         }
@@ -146,17 +158,32 @@ namespace Fitness.ViewModel
 
         public void LoginCommandCanExecute()
         {
-            User user=Fitness.Logic.Data.FitnessC.GetUserByUserEmail(LoginUserName);
-            
-           
+            User user=Fitness.Logic.Data.FitnessC.GetUserByUserEmail( LoginEmail );
 
-            if ( user.Password.Equals(LoginPassword.GetHashCode().ToString()) /* TODO: Andi */ ) 
+            if ( user != null )
             {
-                LoginCommandExecute();
+                if(LoginPassword == null)
+                {
+                    MessageBox.Show(" kapd be!!!!!!!!!!!!!? miert nem irtal jelszot? azt hiszed kitalalom magamtol? ");
+                    return;
+                }
+                string hashedstrpassword = LoginPassword.GetHashCode().ToString();
+
+                if (user.Password.Equals(hashedstrpassword) /* TODO: Andi */ )
+                {
+                    LoggedInUser = user;
+                    LoginCommandExecute();
+                }
+
+                else
+                {
+                    MessageBox.Show(" kapd be!!!!!!!!!!!!!? nem tudod a jelszot? ");
+                }
+                
             }
             else
             {
-                MessageBox.Show(" F. ERror");
+                MessageBox.Show("email");
             }
         }
 
