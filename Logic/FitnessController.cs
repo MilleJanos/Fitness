@@ -29,6 +29,11 @@ namespace Fitness.Logic
             return fitnessDatabase.Role.ToList();
         }
 
+        public List<Lanse> GetLanses()
+        {
+            return fitnessDatabase.Lanse.ToList();
+        }
+
 
     }
 }

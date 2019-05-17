@@ -29,6 +29,12 @@ namespace Fitness.Model
         //[StringLength(maximumLength: 200, MinimumLength = 6)]
         public string Email { get; set; }
 
+        //[StringLength(maximumLength: 300, MinimumLength = 6)]
+        public string Address { get; set; }
+        
+        //[StringLength(maximumLength: 300, MinimumLength = 6)]
+        public string OtherInformations { get; set; }
+
         [Required]
         //[StringLength(maximumLength: 200, MinimumLength = 6)]
         public string Password { get; set; }

@@ -12,21 +12,41 @@ namespace ViewModel.UserControls
 {
     public class UserInfoViewModel : ViewModelBase, IUserInfoContent
     {
-        private User SelectedUser; 
+        private User CurrentUser; 
         private int _userId;
         private string _userBarcode;
         private string _userName;
+        private string _userProfileImagePath;
+        private string _userOtherInformations;
+        private List<Lanse> _lanses;
 
         public UserInfoViewModel()
         {
-            SelectedUser = UserManagerViewModel.LastSelectedUser;
-            _userId = SelectedUser.Id;
-            _userBarcode = SelectedUser.Barcode;
-            _userName = SelectedUser.FirstName + " " + SelectedUser.LastName;
+            CurrentUser = UserManagerViewModel.LastSelectedUser;
+            _userId = CurrentUser.Id;
+            _userBarcode = CurrentUser.Barcode;
+            _userName = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            if( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
+            {
+                UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
+            }
+            else
+            {
+                UserProfileImagePath = @"/View;component/Resources/" + CurrentUser.Image;
+            }
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
+
+            // Get All Lanses belongs to the current user
+            List<Lanse> temp = GetAllLanses();
+            Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
+            //
+            // TODO
+            //
+            //string name = Lanses.ElementAt(0).Type.Name;
+
         }
 
-        public string Header => "User Info: " + SelectedUser.FirstName + " " + SelectedUser.LastName;
+        public string Header => "User Info: " + CurrentUser.FirstName + " " + CurrentUser.LastName;
 
         public RelayCommand CloseTabItemCommand { get; set; }
 
@@ -68,6 +88,50 @@ namespace ViewModel.UserControls
             set
             {
                 _userName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string UserProfileImagePath
+        {
+            get
+            {
+                return _userProfileImagePath;
+            }
+            set
+            {
+                _userProfileImagePath = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string UserOtherInformations
+        {
+            get
+            {
+                return _userOtherInformations;
+            }
+            set
+            {
+                _userOtherInformations = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public List<Lanse> GetAllLanses()
+        {
+            return Fitness.Logic.Data.FitnessC.GetLanses();
+        }
+
+        public List<Lanse> Lanses
+        {
+            get
+            {
+                return _lanses; 
+            }
+            set
+            {
+                _lanses = value;
                 RaisePropertyChanged();
             }
         }

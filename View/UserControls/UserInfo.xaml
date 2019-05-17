@@ -4,8 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.UserControls"
+             xmlns:converters="clr-namespace:Fitness.Common.Converters;assembly=Common"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
 
     <Grid HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
@@ -13,7 +27,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -21,14 +35,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Grid.Row="1"
                     Grid.Column="1"
                     Orientation="Vertical">
-
+ 
             <!-- Row 1 -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="User identifier:"></TextBlock>
@@ -46,9 +60,58 @@
             <!-- Row 4 -->
             <TextBlock Text="{Binding UserName}" Margin="25,0,0,0" FontSize="22"></TextBlock>
 
-            
-            
-                
+        </StackPanel>
+
+        <Image 
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Source="{Binding UserProfileImagePath}"
+            Margin="5"
+            Height="150" 
+            Width="150">
+        </Image>
+        
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Vertical">
+
+            <!-- Row 5 -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Other informations:" Margin="0,10,0,0"></TextBlock>
+                <TextBlock Text="{Binding UserOtherInformations}" Margin="25,0,0,0"></TextBlock>
+            </StackPanel>
+
+            <!-- Row 6 -->
+            <DataGrid Grid.Row="2"
+                Margin="5" 
+                ItemsSource="{Binding Lanses}"
+                SelectedItem="{Binding SelectedLanses}"
+                AutoGenerateColumns="False"
+                IsReadOnly="True">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ItemClickCommand}"/>
+                </DataGrid.InputBindings>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Type.Name}"/>
+                    <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}"/>
+                    <DataGridTextColumn Header="Etart Date" Width="*" Binding="{Binding EndDate}"/>
+                    <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                </DataGrid.Columns>
+
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
+                        Converter={StaticResource DataGridRowNumberConverter}}"
+                        Margin="2,0,2,0"/>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+
+            </DataGrid>
+
+
         </StackPanel>
     </Grid>
 </UserControl>
