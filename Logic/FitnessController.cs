@@ -24,6 +24,11 @@ namespace Fitness.Logic
             return fitnessDatabase.User.ToList();
         }
 
+        public User GetUserByUserEmail(string userEmail)
+        {
+            return fitnessDatabase.User.FirstOrDefault(u => u.Email.Equals(userEmail));
+        }
+
         public List<Role> GetRoles()
         {
             return fitnessDatabase.Role.ToList();

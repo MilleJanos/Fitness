@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.Model;
 using Fitness.Model.DBContext;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ViewModel;
 using ViewModel.UserControls;
 
@@ -22,6 +24,27 @@ namespace Fitness.ViewModel
 
         // Login:
         public RelayCommand LoginCommand { get; private set; }
+        private string loginUSerName;
+
+        public string LoginUserName
+        {
+            get { return loginUSerName; }
+            set { loginUSerName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string loginPassword;
+
+        public string LoginPassword
+        {
+            get { return loginPassword; }
+            set { loginPassword = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
 
         // Logout:
         public RelayCommand LogoutCommand { get; private set; }
@@ -123,11 +146,20 @@ namespace Fitness.ViewModel
 
         public void LoginCommandCanExecute()
         {
-            if ( true /* TODO: Andi */ ) 
+            User user=Fitness.Logic.Data.FitnessC.GetUserByUserEmail(LoginUserName);
+            
+           
+
+            if ( user.Password.Equals(LoginPassword.GetHashCode().ToString()) /* TODO: Andi */ ) 
             {
                 LoginCommandExecute();
             }
+            else
+            {
+                MessageBox.Show(" F. ERror");
+            }
         }
+
 
         public void LoginCommandExecute()
         {
