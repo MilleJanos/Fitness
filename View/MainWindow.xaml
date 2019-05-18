@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selector="clr-namespace:View.TemplateSelector"
         mc:Ignorable="d" Background="White"
-        Title="MainWindow"  MinHeight="800" MinWidth="1000" WindowStartupLocation="CenterScreen">
+        Title="MainWindow"  MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -30,14 +30,24 @@
                 <!-- Title -->
                 <TextBlock Text="Login Pange"></TextBlock>
 
-                <!-- Button: Login -->
-                <Button Content="Login"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Command="{Binding LoginCommand}"/>
+                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="280">
 
-                <!-- DOTO: Andi -->
+                    <TextBlock Text="Email:" VerticalAlignment="Center" />
+                    <TextBox Text="{Binding LoginEmail, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
 
+                    <TextBlock Text="Password:"/>
+                    <TextBox Text="{Binding LoginPassword}"/>
+
+
+                    <Button Content="Login"
+                            Margin="5"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Command="{Binding LoginCommand}"  
+                            CommandParameter="{Binding ElementName=PasswordBox}"/>
+                    
+                </StackPanel>
+                
             </Grid>
             
             
@@ -81,8 +91,16 @@
                         VerticalAlignment="Center"
                             HorizontalAlignment="Right"
                         Orientation="Horizontal">
-                  
-                    <!-- Button: Logout -->
+                    <StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding LoggedInUser.FirstName}" VerticalAlignment="center" FontStyle="Italic" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding LoggedInUser.LastName}" VerticalAlignment="center" FontStyle="Italic"/>
+                        </StackPanel>
+                    
+                    <TextBlock Text="{Binding LoggedInUser.Email}" VerticalAlignment="center" FontStyle="Italic"/>
+                    </StackPanel>
+                        <!-- Button: Logout -->
                     <Button Content="Logout"
                         Grid.Row="3" 
                         Grid.Column="1"

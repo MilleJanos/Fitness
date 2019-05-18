@@ -14,7 +14,7 @@ namespace Fitness.Logic
 
         public FitnessController()
         {
-            this.fitnessDatabase = new FitnessDB();
+            this.fitnessDatabase = new FitnessDB(); 
         }
 
         // GETs:
@@ -22,6 +22,11 @@ namespace Fitness.Logic
         public List<User> GetUsers()
         {
             return fitnessDatabase.User.ToList();
+        }
+
+        public User GetUserByUserEmail(string userEmail)
+        {
+            return fitnessDatabase.User.FirstOrDefault(u => u.Email.Equals(userEmail))??null;
         }
 
         public List<Role> GetRoles()

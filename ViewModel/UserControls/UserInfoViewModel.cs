@@ -57,6 +57,9 @@ namespace ViewModel.UserControls
 
             // Get All Lanses belongs to the current user
             List<Lanse> temp = GetAllLanses();
+            Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
+
+            //string name = Lanses.ElementAt(0).Type.Name;
             Lanses = temp.Where(l => l.UserId == CurrentUser.Id).ToList();
 
             //string name = Lanses.ElementAt(0).Type.Name;  

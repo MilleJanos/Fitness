@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ViewModel;
 using ViewModel.UserControls;
 
@@ -17,6 +18,7 @@ namespace Fitness.ViewModel
     {
         // Common:
         public static MainWindowViewModel Instance { get; private set; }
+        //onmga tarolja az informaciookat onmagaban
         public static User _userInfoToEditUserHelper = null;    // Used to help pass User object from UserInfo to EditUser
 
         private bool _loginVisibility;
@@ -24,6 +26,38 @@ namespace Fitness.ViewModel
 
         // Login:
         public RelayCommand LoginCommand { get; private set; }
+        private User loggedInUser;
+
+
+        public User LoggedInUser
+        {
+            get { return loggedInUser; }
+            set { loggedInUser = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string loginEmail;
+
+        public string LoginEmail
+        {
+            get { return loginEmail; }
+            set { loginEmail = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string loginPassword;
+
+        public string LoginPassword
+        {
+            get { return loginPassword; }
+            set { loginPassword = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
 
         // Logout:
         public RelayCommand LogoutCommand { get; private set; }
@@ -126,11 +160,35 @@ namespace Fitness.ViewModel
 
         public void LoginCommandCanExecute()
         {
-            if ( true /* TODO: Andi */ ) 
+            User user=Fitness.Logic.Data.FitnessC.GetUserByUserEmail( LoginEmail );
+
+            if ( user != null )
             {
-                LoginCommandExecute();
+                if(LoginPassword == null)
+                {
+                    MessageBox.Show(" TeEEEeee!!!!!!!!!!!!!? miert nem irtal jelszot? azt hiszed kitalalom magamtol? ");
+                    return;
+                }
+                string hashedstrpassword = LoginPassword.GetHashCode().ToString();
+
+                if (user.Password.Equals(hashedstrpassword) /* TODO: Andi */ )
+                {
+                    LoggedInUser = user;
+                    LoginCommandExecute();
+                }
+
+                else
+                {
+                    MessageBox.Show(" TEeee!!!!!!!!!!!!!? nem tudod a jelszot? ");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("email");
             }
         }
+
 
         public void LoginCommandExecute()
         {
@@ -146,15 +204,19 @@ namespace Fitness.ViewModel
             if( true /* TODO: Jancsi */)
             {
                 LogoutCommandExecute();
+                
             }
         }
 
         public void LogoutCommandExecute()
         {
 
-            /* TODO: Jancsi - Logging out methods */
-
+            /* TODO: Andi - Logging out methods */
+            LoginEmail = null;
+            LoginPassword = null;
+            LoggedInUser = null;
             ShowLoginPage();
+            
 
         }
 
@@ -166,6 +228,9 @@ namespace Fitness.ViewModel
         public void CloseCommandExecute()
         {
             ViewService.CloseDialog(this);
+            
+           
+
         }
 
         public string PageTitle
@@ -309,6 +374,15 @@ namespace Fitness.ViewModel
                 mainContent = this.Contents.FirstOrDefault(c => c is IUserInfoContent && (c as IUserInfoContent).Header.Equals(content.Header));
                 // Set Tab:
                 UserInfoViewModel vm = new UserInfoViewModel();
+                SetTab(mainContent, vm);
+
+            }
+            else if (content is IAddUserContent)
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IAddUserContent);
+                // Set Tab:
+                AddUserViewModel vm = new AddUserViewModel();
                 SetTab(mainContent, vm);
 
             }

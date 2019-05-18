@@ -20,6 +20,7 @@ namespace ViewModel.UserControls
         public RelayCommand ItemClickCommand { get; private set; }
         public RelayCommand ClearBirthDateCommand { get; private set; }
         public RelayCommand ClearRegistrationDateCommand { get; private set; }
+        public RelayCommand AddUserCommand { get; private set; }
 
         // Filter
         private string _filter_FirstName;
@@ -45,6 +46,7 @@ namespace ViewModel.UserControls
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
             this.ClearBirthDateCommand = new RelayCommand(this.ClearBirthDateExecute);
             this.ClearRegistrationDateCommand = new RelayCommand(this.ClearRegistrationDateExecute);
+            this.AddUserCommand = new RelayCommand(this.AddUserExecute);
         }
 
 
@@ -85,6 +87,10 @@ namespace ViewModel.UserControls
         public void ClearRegistrationDateExecute()
         {
             Filter_RegistrationDate = System.DateTime.Now; // TODO: Change this logic (now == filter off) (2)
+        }
+        public void AddUserExecute()
+        {
+            MainWindowViewModel.Instance.SetNewTab(new AddUserViewModel());
         }
 
         // Filters:
