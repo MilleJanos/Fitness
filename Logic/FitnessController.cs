@@ -30,9 +30,19 @@ namespace Fitness.Logic
             return fitnessDatabase.User.FirstOrDefault(u => u.Email.Equals(userEmail))??null;
         }
 
+        public User GetUserByBarcode(string barcode)
+        {
+            return fitnessDatabase.User.FirstOrDefault(u => u.Barcode.Equals(barcode)) ?? null;
+        }
+
         public List<Role> GetRoles()
         {
             return fitnessDatabase.Role.ToList();
+        }
+
+        public List<Entry> GetEntryes()
+        {
+            return fitnessDatabase.Entry.ToList();
         }
 
         // Recepcionist are allowed to workn only with clients
@@ -44,6 +54,11 @@ namespace Fitness.Logic
         public List<Lanse> GetLanses()
         { 
             return fitnessDatabase.Lanse.ToList();
+        }
+
+        public List<Lanse> GetLansesByUserId(int user_id)
+        {
+            return fitnessDatabase.Lanse.Where(l => l.UserId == user_id).ToList();
         }
 
         public void UpdateUser(int user_id, User user)
@@ -90,6 +105,12 @@ namespace Fitness.Logic
                 throw;
             }
 
+        }
+
+        public void InsertEntry(Entry entry)
+        {
+            fitnessDatabase.Entry.Add(entry);
+            fitnessDatabase.SaveChanges();
         }
 
     }

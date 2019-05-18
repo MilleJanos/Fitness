@@ -41,6 +41,9 @@
     <ApplicationIcon>fitness_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dynamsoft.BarcodeReader, Version=6.5.1.319, Culture=neutral, PublicKeyToken=ad0967c36e09320a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dynamsoft.DotNet.Barcode.6.5.1\lib\net40\Dynamsoft.BarcodeReader.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>

@@ -33,7 +33,7 @@ namespace Fitness.Model.DBContext
         private void AddUsers(FitnessDB context)
         {
             context.User.Add(new User { Id = 0, Barcode = "1508930965252523109412047", FirstName = "Andrea-Edina", LastName = "Fabian", BirthDate = new DateTime(1997, 1, 1), Email = "andi@mail", Password = "andi".GetHashCode().ToString(), PhoneNumber = "0000000000", Image = "profile_0.png", Address = "Address0", OtherInformations = "Other\ninformations",   RegistrationDate = new DateTime(2019, 5, 15),  Active = true, Role = "admin"        });
-            context.User.Add(new User { Id = 1, Barcode = "1508930965252523109412047", FirstName = "Janos", LastName = "Mille", BirthDate = new DateTime(1997, 4, 24) ,Email = "mj@mail", Password = "mj".GetHashCode().ToString(), PhoneNumber = "0744793412", Image = "profile_1.png",         Address = "Address1", OtherInformations = "Other\ninformations",   RegistrationDate = new DateTime(2019, 5, 16),  Active = true, Role = "admin"        });
+            context.User.Add(new User { Id = 1, Barcode = "1508930965252523109412048", FirstName = "Janos", LastName = "Mille", BirthDate = new DateTime(1997, 4, 24) ,Email = "mj@mail", Password = "mj".GetHashCode().ToString(), PhoneNumber = "0744793412", Image = "profile_1.png",         Address = "Address1", OtherInformations = "Other\ninformations",   RegistrationDate = new DateTime(2019, 5, 16),  Active = true, Role = "admin"        });
             context.User.Add(new User { Id = 2, Barcode = "0986508930965252523109415", FirstName = "I am", LastName = "Guest",   BirthDate = new DateTime(2019, 3, 2), Email = "rec@mail", Password = "rec".GetHashCode().ToString(), PhoneNumber = "0123456789", Image = "null",         Address = "Address2", OtherInformations = "Other\ninformations",   RegistrationDate = new DateTime(2019, 5, 17),  Active = true, Role = "receptionist" });
 
             context.User.Add(new User { Id = 3, Barcode = "8630969412020309525203024", FirstName = "Peter", LastName = "Kali",  BirthDate = new DateTime(2011, 1, 23), Email = "nomail3@mail.com",   Password = "_".GetHashCode().ToString(), PhoneNumber = "0123456003", Image = "null", Address = "Address3", OtherInformations = "Other\ninformations", RegistrationDate = new DateTime(2011, 1, 11), Role = "client", Active = true });
@@ -47,11 +47,13 @@ namespace Fitness.Model.DBContext
         private void AddLanseTypes(FitnessDB context)
         {
             lanse_types = new List<LanseType>();
+
             lanse_types.Add(new LanseType { Id = 0, Name = "Best Week",       ActiveDays = "1111111", ActivePerDay = 1, ActiveHoursPerDay = 24, Price = 10,     Active = true, Description="Weekly Lanse" } );
             lanse_types.Add(new LanseType { Id = 1, Name = "Amazing Month",   ActiveDays = "1111100", ActivePerDay = 1, ActiveHoursPerDay = 24, Price = 100,    Active = true, Description="Month Lanse" } );
             lanse_types.Add(new LanseType { Id = 2, Name = "Custom #1",       ActiveDays = "0000011", ActivePerDay = 1, ActiveHoursPerDay = 1,  Price = 3,      Active = true, Description="Custom One #1" } );
             lanse_types.Add(new LanseType { Id = 3, Name = "Custom #2",       ActiveDays = "1000111", ActivePerDay = 2, ActiveHoursPerDay = 24, Price = 25,     Active = true, Description="Custom One #2" } );
             lanse_types.Add(new LanseType { Id = 3, Name = "Custom #3",       ActiveDays = "1010101", ActivePerDay = 1, ActiveHoursPerDay = 24, Price = 25,     Active = false, Description="Under Testing" } );
+
             foreach(LanseType lt in lanse_types )
             {
                 context.LanseType.Add( lt );
@@ -62,7 +64,7 @@ namespace Fitness.Model.DBContext
         private void AddLanses(FitnessDB context)
         {
             List<Lanse> lanses = new List<Lanse>();
-                                                     /*Type = ... Is working ???      */
+                                          
             lanses.Add(new Lanse { Id = 0, TypeId = 0, Type = lanse_types.ElementAt(0),  UserId = 0, Price = 10, StartDate = new DateTime(2019,01,03), EndDate = new DateTime(2019,05,03), Active = true } );
             lanses.Add(new Lanse { Id = 1, TypeId = 2, Type = lanse_types.ElementAt(2),  UserId = 0, Price = 25, StartDate = new DateTime(2019,02,04), EndDate = new DateTime(2019,06,04), Active = true } );
             lanses.Add(new Lanse { Id = 2, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 0, Price = 5, StartDate = new DateTime(2019,03,05), EndDate = new DateTime(2019,08,05), Active = true } );
@@ -70,6 +72,14 @@ namespace Fitness.Model.DBContext
             lanses.Add(new Lanse { Id = 4, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 1, Price = 3, StartDate = new DateTime(2019,05,07), EndDate = new DateTime(2019,10,07), Active = false } );
             lanses.Add(new Lanse { Id = 5, TypeId = 2, Type = lanse_types.ElementAt(2),  UserId = 2, Price = 12, StartDate = new DateTime(2019,06,08), EndDate = new DateTime(2019,11,08), Active = true } );
             lanses.Add(new Lanse { Id = 6, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 3, Price = 30, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = true } );
+            lanses.Add(new Lanse { Id = 7, TypeId = 2, Type = lanse_types.ElementAt(2),  UserId = 1, Price = 128, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = true } );
+            lanses.Add(new Lanse { Id = 8, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 1, Price = 10, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = false } );
+            lanses.Add(new Lanse { Id = 9, TypeId = 1, Type = lanse_types.ElementAt(1),  UserId = 1, Price = 9, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = true } );
+            lanses.Add(new Lanse { Id = 10, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 1, Price = 20, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = true } );
+            lanses.Add(new Lanse { Id = 11, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 1, Price = 32, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = false } );
+            lanses.Add(new Lanse { Id = 12, TypeId = 0, Type = lanse_types.ElementAt(0),  UserId = 1, Price = 32, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = true } );
+            lanses.Add(new Lanse { Id = 13, TypeId = 3, Type = lanse_types.ElementAt(3),  UserId = 1, Price = 74, StartDate = new DateTime(2019,07,09), EndDate = new DateTime(2019,12,09), Active = false } );
+
             foreach(Lanse l in lanses )
             {
                 context.Lanse.Add( l );
