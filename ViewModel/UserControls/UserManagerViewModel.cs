@@ -16,15 +16,18 @@ namespace ViewModel.UserControls
 
         private List<User> _users;
         private User _selectedUser;
+        private bool _adminVisibility = false;
         private bool _EmptyDataGridMessageVisibility = false;
         public RelayCommand ItemClickCommand { get; private set; }
         public RelayCommand ClearBirthDateCommand { get; private set; }
         public RelayCommand ClearRegistrationDateCommand { get; private set; }
         public RelayCommand AddUserCommand { get; private set; }
+        public RelayCommand RefreshCommand { get; private set; }
 
         // Filter
         private string _filter_FirstName;
         private string _filter_LastName;
+        private string _filter_IdStr;
         private string _filter_Barcode;
         private string _filter_Email;
         private string _filter_PhoneNumber;
@@ -37,16 +40,29 @@ namespace ViewModel.UserControls
                
         public UserManagerViewModel()
         {
-            this._users = GetAllUsers();
+            this.Users = GetAllUsers();
+            Users = Admin_Role_Filter(Users);       // Do not show admin & reteptionist & deleted registrations, only if admin is logged in
+
             this._filter_Roles = GetAllRoles();
             this._filter_Roles.Add( new Role { Id = -1, StringId = "all", Name="All", Description = "Used to List all roles" } );
             this._filter_SelectedRoleStrId = "all";
             this._showInactives = true;
+
             this.ItemClickCommand = new RelayCommand(this.ItemClickExecute);
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
             this.ClearBirthDateCommand = new RelayCommand(this.ClearBirthDateExecute);
             this.ClearRegistrationDateCommand = new RelayCommand(this.ClearRegistrationDateExecute);
             this.AddUserCommand = new RelayCommand(this.AddUserExecute);
+            this.RefreshCommand = new RelayCommand(this.RefreshExecute);
+
+            if( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
+            {
+                AdminVisibility = true;
+            }
+            else
+                {
+                AdminVisibility = false;
+            }
         }
 
 
@@ -88,12 +104,36 @@ namespace ViewModel.UserControls
         {
             Filter_RegistrationDate = System.DateTime.Now; // TODO: Change this logic (now == filter off) (2)
         }
+
         public void AddUserExecute()
         {
             MainWindowViewModel.Instance.SetNewTab(new AddUserViewModel());
         }
 
+        public void RefreshExecute()
+        {
+            RecalculateFilters();
+        }
+
         // Filters:
+
+
+        public List<User> Id_Filter(string strId, List<User> users)
+        {
+            if ( strId != "" && strId != null )
+            {
+                try
+                {
+                    int id = Int32.Parse(strId);
+                    return users.Where(u => u.Id == id).ToList();
+                }
+                catch
+                {
+                    return users;
+                }
+            }
+            return users;
+        }
 
         public List<User> FirstName_Filter(string firstname, List<User> users)
         {
@@ -158,6 +198,17 @@ namespace ViewModel.UserControls
             return users;
         }
 
+        // Do not show admin & reteptionist registrations, only if admin is logged in
+        public List<User> Admin_Role_Filter( List<User> users )
+        {
+            if( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
+            {
+                return users;
+            }
+            List<User> temp = users.Where(u => u.Role.Equals("client")).ToList();
+            return temp.Where(u => u.Active).ToList();
+        }
+
         // Filter Properties:
 
         public void RecalculateFilters()
@@ -165,6 +216,8 @@ namespace ViewModel.UserControls
             EmptyDataGridMessageVisibility = false;
             Users = GetAllUsers();
 
+            Users = Id_Filter( Filter_IdStr, Users );
+            Users = Admin_Role_Filter( Users );   
             Users = Role_Filter( Filter_SelectedRoleStrId, Users );
             Users = ShowInactive_Filter( ShowInactives, Users );
             Users = FirstName_Filter( Filter_FirstName, Users );
@@ -211,6 +264,21 @@ namespace ViewModel.UserControls
             }
         }
 
+        
+        public string Filter_IdStr
+        {
+            get
+            {
+                return _filter_IdStr;
+            }
+            set
+            {
+                _filter_IdStr = value;
+                RaisePropertyChanged();
+                RecalculateFilters();
+            }
+        }
+
         public string Filter_Barcode
         {
             get
@@ -250,6 +318,19 @@ namespace ViewModel.UserControls
                 _filter_PhoneNumber = value;
                 RaisePropertyChanged();
                 RecalculateFilters();
+            }
+        }
+
+        public bool AdminVisibility
+        {
+            get
+            {
+                return _adminVisibility;
+            }
+            private set
+            {
+                _adminVisibility = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -360,6 +441,7 @@ namespace ViewModel.UserControls
                 RecalculateFilters();
             }
         }
+
 
     }
 }

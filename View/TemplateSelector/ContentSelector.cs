@@ -45,6 +45,10 @@ namespace View.TemplateSelector
             {
                 return System.Windows.Application.Current.MainWindow.TryFindResource("UserInfoTemplate") as DataTemplate;
             }
+            else if ( item is IEditUserContent )
+            {
+                return System.Windows.Application.Current.MainWindow.TryFindResource("EditUserTemplate") as DataTemplate;
+            }
             // MANAGER:
             else if ( item is IAddUserContent )
             {

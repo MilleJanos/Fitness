@@ -12,18 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.UserControls;
 
 namespace View.UserControls
 {
     /// <summary>
-    /// Interaction logic for UserInfo.xaml
+    /// Interaction logic for EditUser.xaml
     /// </summary>
-    public partial class UserInfo : UserControl
+    public partial class EditUser : UserControl
     {
-        public UserInfo()
+        public EditUser()
         {
-            this.DataContext = new UserInfoViewModel();
             InitializeComponent();
         }
     }

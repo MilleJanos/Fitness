@@ -28,37 +28,10 @@ namespace Fitness.ViewModel
         public RelayCommand LoginCommand { get; private set; }
         private User loggedInUser;
 
-
-        public User LoggedInUser
-        {
-            get { return loggedInUser; }
-            set { loggedInUser = value;
-                RaisePropertyChanged();
-            }
-        }
-
         private string loginEmail;
-
-        public string LoginEmail
-        {
-            get { return loginEmail; }
-            set { loginEmail = value;
-                RaisePropertyChanged();
-            }
-        }
-
         private string loginPassword;
 
-        public string LoginPassword
-        {
-            get { return loginPassword; }
-            set { loginPassword = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-
+        
         // Logout:
         public RelayCommand LogoutCommand { get; private set; }
 
@@ -84,6 +57,11 @@ namespace Fitness.ViewModel
             HomeVisibility = false;
 
             GenerateContents();
+
+            /*DELETE THIS:*/
+            DeleteMe1Command = new RelayCommand(this.DeleteMe1Execute); /*:DELETE THIS*/
+            DeleteMe2Command = new RelayCommand(this.DeleteMe2Execute); /*:DELETE THIS*/
+            DeleteMe3Command = new RelayCommand(this.DeleteMe3Execute); /*:DELETE THIS*/
         }
 
         //
@@ -166,7 +144,7 @@ namespace Fitness.ViewModel
             {
                 if(LoginPassword == null)
                 {
-                    MessageBox.Show(" TeEEEeee!!!!!!!!!!!!!? miert nem irtal jelszot? azt hiszed kitalalom magamtol? ");
+                    MessageBox.Show("Please fill the password field.");
                     return;
                 }
                 string hashedstrpassword = LoginPassword.GetHashCode().ToString();
@@ -179,13 +157,13 @@ namespace Fitness.ViewModel
 
                 else
                 {
-                    MessageBox.Show(" TEeee!!!!!!!!!!!!!? nem tudod a jelszot? ");
+                    MessageBox.Show("Wrong password!");
                 }
                 
             }
             else
             {
-                MessageBox.Show("email");
+                MessageBox.Show("Wrong email!");
             }
         }
 
@@ -195,16 +173,48 @@ namespace Fitness.ViewModel
             ShowHomePage();
         }
 
+        public User LoggedInUser
+        {
+            get { return loggedInUser; }
+            set
+            {
+                loggedInUser = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public string LoginEmail
+        {
+            get { return loginEmail; }
+            set
+            {
+                loginEmail = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public string LoginPassword
+        {
+            get { return loginPassword; }
+            set
+            {
+                loginPassword = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         //
         // LOGOUT:
         //
 
         public void LogoutCommandCanExecute()
         {
-            if( true /* TODO: Jancsi */)
+            if( true )
             {
                 LogoutCommandExecute();
-                
             }
         }
 
@@ -215,8 +225,12 @@ namespace Fitness.ViewModel
             LoginEmail = null;
             LoginPassword = null;
             LoggedInUser = null;
-            ShowLoginPage();
             
+            // Close opened tabs
+            CloseAllTabs();
+
+            // Go Back to Login Page
+            ShowLoginPage();
 
         }
 
@@ -224,13 +238,30 @@ namespace Fitness.ViewModel
         // HOME:
         //
 
-
         public void CloseCommandExecute()
         {
-            ViewService.CloseDialog(this);
+            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Are you sure you want to exit application?", "Exit", MessageBoxButtons.YesNo);
+            if ( dialogResult == DialogResult.Yes )
+            {
+                ViewService.CloseDialog(this);
+            }
+            else if ( dialogResult == DialogResult.No )
+            {
+                //do nothing
+            }
             
-           
+        }
 
+        public void CloseAllTabs()
+        {
+            SelectedContent = this.Contents.FirstOrDefault();
+            foreach(var c in this.Contents.ToList() )
+            {
+                if ( c.ShowCloseButton )
+                {
+                    this.Contents.Remove(c);
+                }
+            }
         }
 
         public string PageTitle
@@ -425,6 +456,27 @@ namespace Fitness.ViewModel
                 // close this tab
                 this.Contents.Remove(content);
             }
+        }
+
+
+        /* TODO: DELETE ME*/
+        public RelayCommand DeleteMe1Command { get; private set; }
+        public RelayCommand DeleteMe2Command { get; private set; }
+        public RelayCommand DeleteMe3Command { get; private set; }
+        public void DeleteMe1Execute()
+        {
+            LoginEmail = "mj@mail";
+            LoginPassword = "mj";
+        }
+        public void DeleteMe2Execute()
+        {
+            LoginEmail = "andi@mail";
+            LoginPassword = "andi";
+        }
+        public void DeleteMe3Execute()
+        {
+            LoginEmail = "rec@mail";
+            LoginPassword = "rec";
         }
 
     }

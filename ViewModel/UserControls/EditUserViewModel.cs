@@ -27,14 +27,19 @@ namespace ViewModel.UserControls
         public List<Role> _roles;
         private string _selectedRoleStrId;
         public bool _active;
+        private bool _adminVisibility;
 
-        private RelayCommand CancelCommand;
-        private RelayCommand SaveCommand;
+        public RelayCommand CancelCommand { get; private set; }
+        public RelayCommand SaveCommand { get; private set; }
 
         public EditUserViewModel()
         {
             // Get User:
             CurrentUser = MainWindowViewModel.Instance.UserInfoToEditUserHelper;
+
+            AdminVisibility = MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin")
+                ? true
+                : false;
 
             LoadInitState();
         }
@@ -58,8 +63,16 @@ namespace ViewModel.UserControls
             PhoneNumber = CurrentUser.PhoneNumber;
             Active = CurrentUser.Active;
 
-            Roles = GetAllRoles();
-            Roles.Add(new Role { Id = -1, StringId = "all", Name = "All", Description = "Used to List all roles" });
+            if ( AdminVisibility )
+            {
+                Roles = GetAllRoles();
+            }
+            else
+            {
+                Roles = GetRoles();
+            }
+            
+            SelectedRoleStrId = CurrentUser.Role;
 
             this.CancelCommand = new RelayCommand(this.CancelExecute);
             this.SaveCommand = new RelayCommand(this.SaveCanExecute);
@@ -69,6 +82,11 @@ namespace ViewModel.UserControls
         private List<Role> GetAllRoles()
         {
             return Fitness.Logic.Data.FitnessC.GetRoles();
+        }
+
+        private List<Role> GetRoles()
+        {
+            return Fitness.Logic.Data.FitnessC.GetRecepcionistAllowedRoles();
         }
 
         private void CancelExecute()
@@ -88,13 +106,14 @@ namespace ViewModel.UserControls
             if ( ValidateInputs() )
             {
                 SaveExecute();
+                MessageBox.Show("Saved.");
+                CloseTabItemExecute();
             }
         }
 
         private void SaveExecute()
         {
             User user = new User();
-            user.Id = CurrentUser.Id;
             user.FirstName = FirstName;
             user.LastName = LastName;
             user.Email = Email;
@@ -103,25 +122,41 @@ namespace ViewModel.UserControls
             user.Role = SelectedRoleStrId;
             user.Active = Active;
             user.PhoneNumber = PhoneNumber;
+            user.OtherInformations = OtherInformations;
+
+
+            if ( AdminVisibility )
+            {
+                user.Id = CurrentUser.Id;
+            }
+            else
+            {
+                user.Id = Id;
+            }
+            
+
             // Copy remained fields:
             user.Image = CurrentUser.Image;
             user.RegistrationDate = CurrentUser.RegistrationDate;
             user.BirthDate = CurrentUser.BirthDate;
+            user.Password = CurrentUser.Password;
 
             // Update in DB
-            Fitness.Logic.Data.FitnessC.UpdateUser(user.Id, user);
+            Fitness.Logic.Data.FitnessC.UpdateUser(CurrentUser.Id, user);
         }
 
 
 
         private bool ValidateInputs()
         {
-            if ( Id.Equals("") )
+            if ( AdminVisibility )
             {
-                MessageBox.Show("Id must be filled!");
-                return false;
+                if ( Id.Equals("") )
+                {
+                    MessageBox.Show("Id must be filled!");
+                    return false;
+                }
             }
-
 
             if ( FirstName.Equals("") )
             {
@@ -143,14 +178,14 @@ namespace ViewModel.UserControls
                 MessageBox.Show("Email must be filled!");
                 return false;
             }
-            else
-            {
-                if ( IsValidEmailAddress(Email) )
-                {
-                    MessageBox.Show("Invalid email!");
-                    return false;
-                }
-            }
+            //else
+            //{
+            //    if ( IsValidEmailAddress(Email) )
+            //    {
+            //        MessageBox.Show("Invalid email!");
+            //        return false;
+            //    }
+            //}
             if ( Address.Equals("") )
             {
                 MessageBox.Show("Address must be filled!");
@@ -324,6 +359,19 @@ namespace ViewModel.UserControls
             set
             {
                 _active = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool AdminVisibility
+        {
+            get
+            {
+                return _adminVisibility;
+            }
+            set
+            {
+                _adminVisibility = value;
                 RaisePropertyChanged();
             }
         }

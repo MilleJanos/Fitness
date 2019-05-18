@@ -4,12 +4,12 @@
   xmlns:userControls="clr-namespace:View.UserControls"
   xmlns:types="clr-namespace:Fitness.Common.Contents;assembly=Common">
 
+    <!-- Home -->
 
     <DataTemplate x:Key="HomeTemplate" DataType="{x:Type types:IHomeContent}">
         <userControls:Home/>
     </DataTemplate>
-
-
+    
     <DataTemplate x:Key="EntryManagerTemplate" DataType="{x:Type types:IEntryManagerContent}">
         <userControls:EntryManager/>
     </DataTemplate>
@@ -30,12 +30,18 @@
         <userControls:StatManager/>
     </DataTemplate>
 
-
+    <!-- User Info -->
+    
     <DataTemplate x:Key="UserInfoTemplate" DataType="{x:Type types:IUserInfoContent}">
         <userControls:UserInfo/>
     </DataTemplate>
 
+    <DataTemplate x:Key="EditUserTemplate" DataType="{x:Type types:IEditUserContent}">
+        <userControls:EditUser/>
+    </DataTemplate>
 
+    <!-- Manager -->
+    
     <DataTemplate x:Key="AddLanseTypeTemplate" DataType="{x:Type types:IAddLanseTypeContent}">
         <userControls:AddLanseType/>
     </DataTemplate>

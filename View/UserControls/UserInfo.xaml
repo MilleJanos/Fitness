@@ -47,25 +47,28 @@
             <!-- Row 0 -->
             <TextBlock Text="{Binding ErrorMessage}" 
                        Margin="25,0,0,0" FontSize="15" 
-                       Visibility="{Binding ErrorMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
+                       Visibility="{Binding ErrorMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Foreground="Red">
             </TextBlock>
-     
 
             <!-- Row 1 -->
+            <Button Content="Refresh" Command="{Binding RefreshCommand}" Width="70" HorizontalAlignment="Left" Height="20"></Button>
+            
+            <!-- Row 2 -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="User identifier:"></TextBlock>
                 <TextBlock Text="{Binding UserId}" Margin="25,0,0,0" FontSize="14"></TextBlock>
             </StackPanel>
 
-            <!-- Row 2 -->
+            <!-- Row 3 -->
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Text="User barcode:"></TextBlock>
                 <TextBlock Text="{Binding UserBarcode}" Margin="25,0,0,0" FontSize="14"></TextBlock>
             </StackPanel>
 
-            <!-- Row 3 -->
-            <TextBlock Text="User name:" Margin="0,10,0,0"></TextBlock>
             <!-- Row 4 -->
+            <TextBlock Text="User name:" Margin="0,10,0,0"></TextBlock>
+            <!-- Row 5 -->
             <TextBlock Text="{Binding UserName}" Margin="25,0,0,0" FontSize="22"></TextBlock>
 
         </StackPanel>
@@ -84,13 +87,13 @@
                     Grid.Column="1"
                     Orientation="Vertical">
 
-            <!-- Row 5 -->
+            <!-- Row 6 -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Other informations:" Margin="0,10,0,0"></TextBlock>
                 <TextBlock Text="{Binding UserOtherInformations}" Margin="25,0,0,0"></TextBlock>
             </StackPanel>
 
-            <!-- Row 6 -->
+            <!-- Row 7 -->
             <TextBlock Text="Lanses" Margin="0,25,0,0"></TextBlock>
             <DataGrid   Grid.Row="2"
                         Grid.Column="1"
@@ -138,8 +141,8 @@
                 
             </Button>
 
-            <Button Content="Delete" 
-                    Command="{Binding DeleteUserCommand}"
+            <Button Content="{Binding DeleteOrRollbackTitle}" 
+                    Command="{Binding DeleteOrRollbackUserCommand}"
                     MaxWidth="100">
             </Button>
             

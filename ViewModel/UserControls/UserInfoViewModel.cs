@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace ViewModel.UserControls
 {
     public class UserInfoViewModel : ViewModelBase, IUserInfoContent
     {
-        public static UserInfoViewModel Instance;
+        //public static UserInfoViewModel Instance;
 
         private User CurrentUser; 
         private int _userId;
@@ -21,62 +23,31 @@ namespace ViewModel.UserControls
         private string _userProfileImagePath;
         private string _userOtherInformations;
         private List<Lanse> _lanses;
+        private string _deleteOrRollbackTitle;
 
         private string _errorMessage;
         private bool _errorMessageVisibility;
 
-        private RelayCommand EditUserCommand;
-        private RelayCommand DeleteUserCommand;
+        public RelayCommand EditUserCommand { get; private set; }
+        public RelayCommand DeleteOrRollbackUserCommand { get; private set; }
+        public RelayCommand RefreshCommand { get; private set; }
         
+
         public UserInfoViewModel()
         {
-            Instance = this;
+            CurrentUser = CopyOfThisUser(UserManagerViewModel.LastSelectedUser);
 
-            CurrentUser = UserManagerViewModel.LastSelectedUser;
-            _userId = CurrentUser.Id;
-            _userBarcode = CurrentUser.Barcode;
-            _userName = CurrentUser.FirstName + " " + CurrentUser.LastName;
-            UserOtherInformations = (CurrentUser.OtherInformations.Equals("")) 
-                    ? "No information." 
-                    : CurrentUser.OtherInformations;
+            //Instance = this;
 
-            if( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
-            {
-                //UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
-                UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
-
-            }
-            else
-            {
-                UserProfileImagePath = @"/View;component/Resources/" + CurrentUser.Image;
-            }
+            RefreshUserInfo();
 
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
             this.EditUserCommand = new RelayCommand(this.EditUserExecute);
-            this.DeleteUserCommand = new RelayCommand(this.DeleteUserExecute);
-
-            // Get All Lanses belongs to the current user
-            List<Lanse> temp = GetAllLanses();
-            Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
-
-            //string name = Lanses.ElementAt(0).Type.Name;
-            Lanses = temp.Where(l => l.UserId == CurrentUser.Id).ToList();
-
-            //string name = Lanses.ElementAt(0).Type.Name;  
-
-            // Show message if user is Invisible (user.Active == false):
-            ErrorMessage = "User is Inactive!";
-            if( CurrentUser.Active )
-            {
-                ErrorMessageVisibility = false;
-            }
-            else
-            {
-                ErrorMessageVisibility = true;
-            }
+            this.DeleteOrRollbackUserCommand = new RelayCommand(this.DeleteOrRollbackUserExecute);
+            this.RefreshCommand = new RelayCommand(this.RefreshExecute);
         }
 
-        public string Header => "User Info: " + CurrentUser.FirstName + " " + CurrentUser.LastName;
+        public string Header => "User Info "/* + CurrentUser.FirstName + " " + CurrentUser.LastName*/;
 
         public RelayCommand CloseTabItemCommand { get; set; }
 
@@ -193,6 +164,19 @@ namespace ViewModel.UserControls
             }
         }
 
+        public string DeleteOrRollbackTitle
+        {
+            get
+            {
+                return _deleteOrRollbackTitle;
+            }
+            set
+            {
+                _deleteOrRollbackTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public void CloseTabItemExecute()
         {
             MainWindowViewModel.Instance.CloseTabItem(this);
@@ -205,11 +189,127 @@ namespace ViewModel.UserControls
             MainWindowViewModel.Instance.SetNewTab(new EditUserViewModel());
         }
 
-        public void DeleteUserExecute()
+        public void DeleteOrRollbackUserExecute()
         {
-            // TODO: MAKE THIS USER Invisible:  User.Active = false;
-            
+            if ( CurrentUser.Active )
+            {
+                // Make it inactive
+                DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete this use ?", "Delete", MessageBoxButtons.YesNo);
+                if ( dialogResult == DialogResult.Yes )
+                {
+                    CurrentUser.Active = false;
+                    Fitness.Logic.Data.FitnessC.UpdateUser(CurrentUser.Id, CurrentUser);
+                    DeleteOrRollbackTitle = "Rollback User";
+                }
+                else if ( dialogResult == DialogResult.No )
+                {
+                    //do nothing
+                }
+            }
+            else
+            {
+                if( ! MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
+                {
+                    System.Windows.MessageBox.Show("Only admin can rollback deleted user!");
+                    return;
+                }
+
+                // if is admin:
+                DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Are you sure you want to rollback use ?", "Rollback", MessageBoxButtons.YesNo);
+                if ( dialogResult == DialogResult.Yes )
+                {
+                    // Make it back active
+                    CurrentUser.Active = true;
+                    Fitness.Logic.Data.FitnessC.UpdateUser(CurrentUser.Id, CurrentUser);
+                    DeleteOrRollbackTitle = "Delete";
+                }
+                else if ( dialogResult == DialogResult.No )
+                {
+                    //do nothing
+                }
+            }
+            RaisePropertyChanged();
         }
+
+        public void RefreshExecute()
+        {
+            RefreshUserInfo();
+        }
+
+        public void RefreshUserInfo()
+        {
+            _userId = CurrentUser.Id;
+            _userBarcode = CurrentUser.Barcode;
+            _userName = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            UserOtherInformations = (CurrentUser.OtherInformations.Equals(""))
+                    ? "No information."
+                    : CurrentUser.OtherInformations;
+
+            if ( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
+            {
+                //UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
+                UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
+
+            }
+            else
+            {
+                UserProfileImagePath = @"/View;component/Resources/" + CurrentUser.Image;
+            }
+
+            // Get All Lanses belongs to the current user
+            List<Lanse> temp = GetAllLanses();
+            Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
+
+            //string name = Lanses.ElementAt(0).Type.Name;
+            Lanses = temp.Where(l => l.UserId == CurrentUser.Id).ToList();
+
+            //string name = Lanses.ElementAt(0).Type.Name;  
+
+            // Show message if user is Invisible (user.Active == false):
+            ErrorMessage = "User is Deleted!";
+            if ( CurrentUser.Active )
+            {
+                ErrorMessageVisibility = false;
+            }
+            else
+            {
+                ErrorMessageVisibility = true;
+            }
+
+            if ( CurrentUser.Active )
+            {
+                DeleteOrRollbackTitle = "Delete";
+            }
+            else
+            {
+                DeleteOrRollbackTitle = "Rollback user";
+            }
+        }
+
+        private User CopyOfThisUser(User user)
+        {
+            User result = new User();
+
+            result.Id = user.Id;
+            result.Id = user.Id;
+            result.Barcode = user.Barcode;
+            result.FirstName = user.FirstName;
+            result.LastName = user.LastName;
+            result.BirthDate = user.BirthDate;
+            result.Email = user.Email;
+            result.Address = user.Address;
+            result.OtherInformations = user.OtherInformations;
+            result.Password = user.Password;
+            result.PhoneNumber = user.PhoneNumber;
+            result.Image = user.Image;
+            result.Role = user.Role;
+            result.RegistrationDate = user.RegistrationDate;
+            result.Active = user.Active;
+
+            return result;
+        }
+
+        
 
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using Fitness.Model.DBContext;
 using System.Threading.Tasks;
 using Fitness.Model;
+using System.Data.Entity.Validation;
 
 namespace Fitness.Logic
 {
@@ -34,20 +35,60 @@ namespace Fitness.Logic
             return fitnessDatabase.Role.ToList();
         }
 
-        public List<Lanse> GetLanses()
+        // Recepcionist are allowed to workn only with clients
+        public List<Role> GetRecepcionistAllowedRoles()
         {
+            return fitnessDatabase.Role.Where(r => r.StringId.Equals("client")).ToList();
+        }
+
+        public List<Lanse> GetLanses()
+        { 
             return fitnessDatabase.Lanse.ToList();
         }
 
         public void UpdateUser(int user_id, User user)
         {
-            User result = ( from u in fitnessDatabase.User
-                            where u.Id == user_id
-                            select u ).SingleOrDefault();
 
-            result = user;
+            try
+            {
+                User result = ( from u in fitnessDatabase.User
+                                where u.Id == user_id
+                                select u ).SingleOrDefault();
 
-            fitnessDatabase.SaveChanges();
+                result.Id = user.Id;
+                result.Id = user.Id;
+                result.Barcode = user.Barcode;
+                result.FirstName = user.FirstName;
+                result.LastName = user.LastName;
+                result.BirthDate = user.BirthDate;
+                result.Email = user.Email;
+                result.Address = user.Address;
+                result.OtherInformations = user.OtherInformations;
+                result.Password = user.Password;
+                result.PhoneNumber = user.PhoneNumber;
+                result.Image = user.Image;
+                result.Role = user.Role;
+                result.RegistrationDate = user.RegistrationDate;
+                result.Active = user.Active;
+
+                fitnessDatabase.SaveChanges();
+
+                
+            }
+            catch ( DbEntityValidationException e )
+            {
+                foreach ( var eve in e.EntityValidationErrors )
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach ( var ve in eve.ValidationErrors )
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
 
         }
 

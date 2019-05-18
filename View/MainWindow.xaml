@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selector="clr-namespace:View.TemplateSelector"
         mc:Ignorable="d" Background="White"
-        Title="MainWindow"  MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow"  MinHeight="600" MinWidth="800" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -20,32 +20,52 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <Grid>
+        <Grid Background="LightBlue">
 
             
             
             <!-- LOGIN PAGE -->
             <Grid Visibility="{Binding LoginVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                <!-- Title -->
-                <TextBlock Text="Login Pange"></TextBlock>
 
-                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="280">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="300" MinHeight="250" Background="White">
 
-                    <TextBlock Text="Email:" VerticalAlignment="Center" />
-                    <TextBox Text="{Binding LoginEmail, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                    <!-- Title -->
+                    <TextBlock Text="Login" TextAlignment="Center" FontSize="20" Margin="0,0,0,30"></TextBlock>
 
-                    <TextBlock Text="Password:"/>
-                    <TextBox Text="{Binding LoginPassword}"/>
+                    <TextBlock Text="Email:" VerticalAlignment="Center" Margin="70,0,70,0"/>
+                    <TextBox Text="{Binding LoginEmail, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="70,0,70,0"/>
+
+                    <TextBlock Text="Password:" Margin="70,10,70,0"/>
+                    <TextBox Text="{Binding LoginPassword}" Margin="70,0,70,0"/>
 
 
                     <Button Content="Login"
-                            Margin="5"
-                            HorizontalAlignment="Right"
+                            Margin="10,50,10,5"
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
                             Command="{Binding LoginCommand}"  
                             CommandParameter="{Binding ElementName=PasswordBox}"/>
-                    
+
+                    <!-- DELETE ME -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Admin1"
+                                Margin="10,50,10,5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding DeleteMe1Command}"/>
+                        <Button Content="Admin2"
+                                Margin="10,50,10,5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding DeleteMe2Command}"/>
+                        <Button Content="Recepcionist1"
+                                Margin="10,50,10,5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding DeleteMe3Command}"/>
+                    </StackPanel>
+
                 </StackPanel>
                 
             </Grid>
@@ -53,6 +73,7 @@
             
             
             <!-- HOME PAGE -->
+            <!--<Grid  Visibility="Hidden"-->
             <Grid  Visibility="{Binding HomeVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
