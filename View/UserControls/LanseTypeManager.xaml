@@ -4,9 +4,134 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.UserControls"
+             xmlns:converters="clr-namespace:Fitness.Common.Converters;assembly=Common"
              mc:Ignorable="d" 
+             Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+
     <Grid>
-        <TextBlock Text="LanseTypeManager View" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 - Title -->
+        <TextBlock Text="Lanse Type Manager" 
+                    Grid.Row="0"
+                    VerticalAlignment="Center" 
+                    Margin="1" 
+                    TextAlignment="Center" 
+                    FontSize="16">
+        </TextBlock>
+
+        <!-- Row 2 - Filters -->
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+        
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                    <TextBlock Text="Id" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
+
+                <StackPanel  Orientation="Horizontal"  HorizontalAlignment="Left">
+                    <TextBlock Text="Name" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
+            
+            </StackPanel>
+
+            <StackPanel Margin="25,0,0,0">
+
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                    <TextBlock Text="Description" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <TextBox MinWidth="100" Margin="5" Text="{Binding Filter_Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
+
+                <StackPanel  Orientation="Horizontal"  HorizontalAlignment="Left">
+                    <TextBlock Text="Active" Margin="5" MinWidth="50" TextAlignment="Center"></TextBlock>
+                    <ComboBox MinWidth="100" Margin="5"
+                              ItemsSource="{Binding Filter_Active}"
+
+                              SelectedValue="{Binding Filter_SelectedActive, Mode=TwoWay}"
+                              IsSynchronizedWithCurrentItem="True"
+                              >
+                            <!--SelectedValuePath="StringId"-->
+                            <!--DisplayMemberPath="Name"-->
+                    </ComboBox>
+                </StackPanel>
+
+                
+
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Row 3 - New Button -->
+        <Button Content="Add New Lanse Type"
+                Grid.Row="2"
+                HorizontalAlignment="Right"
+                Command="{Binding AddNewCommand}"
+                Width="150" Height="25">
+            
+        </Button>
+        
+        <!-- Row 4 - Data Grid -->
+        <DataGrid Grid.Row="3"
+            Margin="5" 
+            ItemsSource="{Binding LanseTypes}"
+            SelectedItem="{Binding SelectedLanseType}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
+
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ItemClickCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="ActiveDays" Width="*" Binding="{Binding ActiveDays}"/>
+                <DataGridTextColumn Header="ActivePerDay" Width="*" Binding="{Binding ActivePerDay}"/>
+                <DataGridTextColumn Header="ActiveHoursPerDay" Width="*" Binding="{Binding ActiveHoursPerDay}"/>
+                <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Active date" Width="*" Binding="{Binding Active}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
+                        Converter={StaticResource DataGridRowNumberConverter}}"
+                        Margin="2,0,2,0"/>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+
+        </DataGrid>
+
+        <!-- Error Message -->
+        <TextBlock Grid.Row="3"
+                   Text="No search result" Visibility="{Binding EmptyDataGridMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+        </TextBlock>
+
+
     </Grid>
 </UserControl>

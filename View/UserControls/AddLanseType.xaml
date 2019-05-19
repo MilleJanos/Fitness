@@ -6,9 +6,78 @@
              xmlns:local="clr-namespace:View.UserControls"
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
+  
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="AddLanseType View" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock Text="Add new Lanse Type" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18"></TextBlock>
+
+        <TextBlock Text="Name" Margin="0,0,10,0" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Name}" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Active days" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding ActiveDays}" MinWidth="100"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Active / day" Margin="0,0,10,0" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding ActivePerDay}" MinWidth="100"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Active hours / day" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding ActiveHoursPerDay}" MinWidth="100"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Price" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Price}" MinWidth="100"  Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Description" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Description}" MinWidth="100"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Active" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">></TextBlock>
+        <TextBox Text="{Binding Active}" MinWidth="100"  Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+
+        <TextBlock Text="Active" Margin="0,0,10,0" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <CheckBox IsChecked="{Binding Active}" MinWidth="100"  Grid.Row="9" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"></CheckBox>
+
+        <StackPanel 
+        Grid.Row="10" 
+        Grid.Column="1"
+        Grid.ColumnSpan="3"
+        Orientation="Horizontal"
+        HorizontalAlignment="Center">
+
+            <Button Content="Cancel" Command="{Binding CancelCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
+            <Button Content="Save" Command="{Binding SaveCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
+
+        </StackPanel>
     </Grid>
+
 </UserControl>

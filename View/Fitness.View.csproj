@@ -163,6 +163,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\alpha_entry_manager.png" />
+    <Content Include="Resources\Images\alpha_lansetype_manager.png" />
+    <Content Include="Resources\Images\alpha_lanse_manager.png" />
+    <Content Include="Resources\Images\alpha_statistics_manager.png" />
+    <Content Include="Resources\Images\alpha_user.png" />
+    <Content Include="Resources\Images\alpha_user_manager.png" />
     <Content Include="Resources\Images\entry_manager.png" />
     <Content Include="Resources\Images\lansetype_manager.png" />
     <Content Include="Resources\Images\lanse_manager.png" />

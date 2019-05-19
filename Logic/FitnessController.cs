@@ -45,6 +45,11 @@ namespace Fitness.Logic
             return fitnessDatabase.Entry.ToList();
         }
 
+        public List<LanseType> GetLanseTypes()
+        {
+            return fitnessDatabase.LanseType.ToList();
+        }
+
         // Recepcionist are allowed to workn only with clients
         public List<Role> GetRecepcionistAllowedRoles()
         {
@@ -110,6 +115,12 @@ namespace Fitness.Logic
         public void InsertEntry(Entry entry)
         {
             fitnessDatabase.Entry.Add(entry);
+            fitnessDatabase.SaveChanges();
+        }
+
+        public void InsertLanseType(LanseType lanse_type)
+        {
+            fitnessDatabase.LanseType.Add(lanse_type);
             fitnessDatabase.SaveChanges();
         }
 
