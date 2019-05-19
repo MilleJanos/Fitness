@@ -58,7 +58,8 @@
             </TextBlock>
 
             <Image 
-                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\entry_manager.png"
+                    
+                    Source="{Binding EntryManagerImageStr}"
                     Width="200" Height="200">
             </Image>
 
@@ -96,7 +97,7 @@
             </TextBlock>
 
             <Image 
-                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\user_manager.png"
+                    Source="{Binding UserManagerImageStr}"
                     Width="200" Height="200">
             </Image>
 

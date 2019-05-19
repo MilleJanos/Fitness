@@ -4,6 +4,7 @@ using Fitness.Model;
 using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,24 @@ namespace ViewModel.UserControls
         public RelayCommand LanseTypeManager { get; private set; }
         public RelayCommand StatisticsManager { get; private set; }
 
-  
+        private string _userManagerImageStr;
+        private string _entryManagerImageStr;
+        private string _lanseManagerImageStr;
+        private string _lanseTypManagereImageStr;
+        private string _statisticsManagerImageStr;
+
+
         public HomeViewModel()
         {
             Instance = this;
+
             this.EntryManager = new RelayCommand(this.EntryManagerExecute);
             this.UserManager = new RelayCommand(this.UserManagerExecute);
             this.LanseManager = new RelayCommand(this.LanseManagerExecute);
             this.LanseTypeManager = new RelayCommand(this.LanseTypeManagerCanExecute);
             this.StatisticsManager = new RelayCommand(this.StatisticsManagerCanExecute);
+
+            InitImages();
         } 
 
 
@@ -55,6 +65,15 @@ namespace ViewModel.UserControls
             {
                 IsAdmin = false;
             }
+        }
+
+        public void InitImages()
+        {
+            UserManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/user_manager.png");
+            EntryManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/entry_manager.png");
+            LanseManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/lanse_manager.png");
+            LanseTypManagereImageStr = Path.GetFullPath("../../../View/Resources/Images/lansetype_manager.png");
+            StatisticsManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/statistics_manager.png");
         }
 
         // Commands:
@@ -120,5 +139,69 @@ namespace ViewModel.UserControls
             }
         }
 
+        public string UserManagerImageStr
+        {
+            get
+            {
+                return _userManagerImageStr;
+            }
+            set
+            {
+                _userManagerImageStr = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string EntryManagerImageStr
+        {
+            get
+            {
+                return _entryManagerImageStr;
+            }
+            set
+            {
+                _entryManagerImageStr = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string LanseManagerImageStr
+        {
+            get
+            {
+                return _lanseManagerImageStr;
+            }
+            set
+            {
+                _lanseManagerImageStr = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string LanseTypManagereImageStr
+        {
+            get
+            {
+                return _lanseTypManagereImageStr;
+            }
+            set
+            {
+                _lanseTypManagereImageStr = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string StatisticsManagerImageStr
+        {
+            get
+            {
+                return _statisticsManagerImageStr;
+            }
+            set
+            {
+                _statisticsManagerImageStr = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

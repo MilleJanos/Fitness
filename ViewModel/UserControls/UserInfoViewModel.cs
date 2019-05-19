@@ -4,6 +4,7 @@ using Fitness.Model;
 using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -248,16 +249,12 @@ namespace ViewModel.UserControls
 
             if ( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
             {
-                int x = 10;
-                //"/AssemblyName;component/Images/ImageName.jpg"
-                //UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
-                //UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
-                UserProfileImagePath = @"C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\profile_icon.png";
+                UserProfileImagePath = Path.GetFullPath("../../../View/Resources/Images/profile_icon.png");
 
             }
             else
             {
-                UserProfileImagePath = @"C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\" + CurrentUser.Image;
+                UserProfileImagePath = Path.GetFullPath("../../../View/Resources/Images/" + CurrentUser.Image);
             }
 
             // Get All Lanses belongs to the current user
