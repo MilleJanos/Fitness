@@ -149,8 +149,7 @@ namespace ViewModel.UserControls
         {
             return Fitness.Logic.Data.FitnessC.GetLanses();
         }
-
-
+        
         public List<Lanse> Lanses
         {
             get
@@ -176,6 +175,8 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
+
+
 
         public void CloseTabItemExecute()
         {
@@ -247,13 +248,16 @@ namespace ViewModel.UserControls
 
             if ( CurrentUser.Image.Equals("") || CurrentUser.Image.Equals("null") )
             {
+                int x = 10;
+                //"/AssemblyName;component/Images/ImageName.jpg"
                 //UserProfileImagePath = @"/View;component/Resources/profile_icon.png";
-                UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
+                //UserProfileImagePath = "pack://application:Fitness.View;component/Resources/profile_icon.png";
+                UserProfileImagePath = @"C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\profile_icon.png";
 
             }
             else
             {
-                UserProfileImagePath = @"/View;component/Resources/" + CurrentUser.Image;
+                UserProfileImagePath = @"C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\" + CurrentUser.Image;
             }
 
             // Get All Lanses belongs to the current user
@@ -261,7 +265,7 @@ namespace ViewModel.UserControls
             Lanses = temp;//.Where(l => l.UserId == CurrentUser.Id).ToList();
 
             //string name = Lanses.ElementAt(0).Type.Name;
-            Lanses = temp.Where(l => l.UserId == CurrentUser.Id).ToList();
+            Lanses = temp.Where(l => l.UserId == CurrentUser.Id     -1     ).ToList();
 
             //string name = Lanses.ElementAt(0).Type.Name;  
 

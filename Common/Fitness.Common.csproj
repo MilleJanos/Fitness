@@ -69,6 +69,7 @@
     <Compile Include="Contents\IMainContent.cs" />
     <Compile Include="Contents\IUserInfoContent.cs" />
     <Compile Include="Contents\IUserManagerContent.cs" />
+    <Compile Include="Converters\BooleanToForegroundColor.cs" />
     <Compile Include="Converters\DataGridRowNumberConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />

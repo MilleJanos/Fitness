@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.Model;
 using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace ViewModel.UserControls
 {
     public class HomeViewModel : ViewModelBase, IHomeContent
     {
+        private bool _isAdmin;
+        public static HomeViewModel Instance;
+
         public RelayCommand EntryManager { get; private set; }
         public RelayCommand UserManager { get; private set; }
         public RelayCommand LanseManager { get; private set; }
@@ -21,6 +25,7 @@ namespace ViewModel.UserControls
   
         public HomeViewModel()
         {
+            Instance = this;
             this.EntryManager = new RelayCommand(this.EntryManagerExecute);
             this.UserManager = new RelayCommand(this.UserManagerExecute);
             this.LanseManager = new RelayCommand(this.LanseManagerExecute);
@@ -36,6 +41,21 @@ namespace ViewModel.UserControls
 
         public bool ShowCloseButton => false;
 
+
+        public void RefreshButtonsVisibility()
+        {
+            User u = MainWindowViewModel.Instance.LoggedInUser;
+            if ( u != null )
+            {
+                IsAdmin = u.Role.Equals("admin")
+                    ? true
+                    : false;
+            }
+            else
+            {
+                IsAdmin = false;
+            }
+        }
 
         // Commands:
         private void EntryManagerExecute()
@@ -85,6 +105,19 @@ namespace ViewModel.UserControls
         private void StatisticsManagerExecute()
         {
             MainWindowViewModel.Instance.SetNewTab(new StatManagerViewModel());
+        }
+
+        public bool IsAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+            set
+            {
+                _isAdmin = value;
+                RaisePropertyChanged();
+            }
         }
 
     }

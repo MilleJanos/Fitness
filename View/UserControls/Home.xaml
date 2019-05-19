@@ -4,15 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.UserControls"
-             mc:Ignorable="d" Background="White">
-            <!--d:DesignHeight="800" d:DesignWidth="1000">-->
+             mc:Ignorable="d" Background="LightBlue"
+             d:DesignHeight="800" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
@@ -26,75 +35,199 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
+        <Grid Grid.Row="1"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    MinWidth="100" MinHeight="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
 
-            <Button Content="Entry Manager"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="3"
-                    Margin="20"
-                    Padding="5"
-                    MinWidth="100"
-                    MinHeight="50"
-                    MaxWidth="300"
+            <TextBlock 
+                    Text="Entry Manager"
+                    Width="200" 
+                Margin="0,200,0,0"
+                    Foreground="Black"
+                    FontWeight="Heavy"
                     FontSize="20"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom">
+            </TextBlock>
+
+            <Image 
+                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\entry_manager.png"
+                    Width="200" Height="200">
+            </Image>
+
+            <Button Content=""
+                    Padding="5"
+                    Width="200" 
+                    Height="200"
+                    Foreground="White"
+                    FontWeight="Heavy"
+                    FontSize="20"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Command="{Binding EntryManager}">
             </Button>
+           
+            
+        </Grid>
 
-            <Button Content="User Manager"
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Grid.ColumnSpan="3"
-                    Margin="20"
-                    Padding="5"
-                    MinWidth="100"
-                    MinHeight="50"
-                    MaxWidth="300"
+        <Grid Grid.Row="1"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
+                    MinWidth="100" MinHeight="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <TextBlock 
+                    Text="User Manager"
+                    Width="200" 
+                Margin="0,200,0,0"
+                    Foreground="Black"
+                    FontWeight="Heavy"
                     FontSize="20"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom">
+            </TextBlock>
+
+            <Image 
+                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\user_manager.png"
+                    Width="200" Height="200">
+            </Image>
+
+            <Button Content=""
+                    Padding="5"
+                    Width="200" 
+                    Height="200"
+                    Foreground="White"
+                    FontWeight="Heavy"
+                    FontSize="20"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Command="{Binding UserManager}">
             </Button>
 
-            <Button Content="Lanse Manager"
-                    Grid.Row="3"
+        </Grid>
+
+
+        <Grid Grid.Row="2"
                     Grid.Column="3"
-                    Grid.ColumnSpan="3"
-                    Margin="20"
-                    Padding="5"
-                    MinWidth="100"
-                    MinHeight="50"
-                    MaxWidth="300"
+                    Grid.ColumnSpan="2"
+                    MinWidth="100" MinHeight="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <TextBlock 
+                    Text="Lanse Manager"
+                    Width="200" 
+                    Margin="0,200,0,0"
+                    Foreground="Black"
+                    FontWeight="Heavy"
                     FontSize="20"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom">
+            </TextBlock>
+
+            <Image 
+                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\lanse_manager.png"
+                    Width="200" Height="200">
+            </Image>
+
+            <Button Content=""
+                    Padding="5"
+                    Width="200" 
+                    Height="200"
+                    Foreground="White"
+                    FontWeight="Heavy"
+                    FontSize="20"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Command="{Binding LanseManager}">
             </Button>
+            
+        </Grid>
 
-        <Button Content="Lanse Type Manager"
-                    Grid.Row="4"
-                    Grid.Column="4"
-                    Grid.ColumnSpan="3"
-                    Margin="20"
-                    Padding="5"
-                    MinWidth="100"
-                    MinHeight="50"
-                    MaxWidth="300"
+
+        <Grid Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    MinWidth="100" MinHeight="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding IsAdmin , Converter={StaticResource BooleanToVisibilityConverter}}">
+           
+            <TextBlock 
+                    Text="Lanse Type Manager"
+                    Width="200" 
+                Margin="0,200,0,0"
+                    Foreground="Black"
+                    FontWeight="Heavy"
                     FontSize="20"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom">
+            </TextBlock>
+
+            <Image 
+                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\lansetype_manager.png"
+                    Width="200" Height="200">
+            </Image>
+
+            <Button Content=""
+                    Padding="5"
+                    Width="200" 
+                    Height="200"
+                    Foreground="White"
+                    FontWeight="Heavy"
+                    FontSize="20"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Command="{Binding LanseTypeManager}">
-        </Button>
+            </Button>
 
-        <Button Content="Statistics Manager"
-                    Grid.Row="5"
+        </Grid>
+
+        <Grid Grid.Row="2"
                     Grid.Column="5"
-                    Grid.ColumnSpan="3"
-                    Margin="20"
-                    Padding="5"
-                    MinWidth="100"
-                    MinHeight="50"
-                    MaxWidth="300"
+                    Grid.ColumnSpan="2"
+                    MinWidth="100" MinHeight="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding IsAdmin , Converter={StaticResource BooleanToVisibilityConverter}}">
+
+            <TextBlock 
+                    Text="Statistics Manager"
+                    Width="200" 
+                    Margin="0,200,0,0"
+                    Foreground="Black"
+                    FontWeight="Heavy"
                     FontSize="20"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom">
+            </TextBlock>
+
+            <Image 
+                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\statistics_manager.png"
+                    Width="200" Height="200">
+            </Image>
+
+            <Button Content=""
+                    Padding="5"
+                    Width="200" 
+                    Height="200"
+                    Foreground="White"
+                    FontWeight="Heavy"
+                    FontSize="20"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Command="{Binding StatisticsManager}">
-        </Button>
+            </Button>
+
+        </Grid>    
+
 
     </Grid>
 </UserControl>

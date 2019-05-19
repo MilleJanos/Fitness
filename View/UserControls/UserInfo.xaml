@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/View;component/Resources/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:DataGridRowNumberConverter x:Key="DataGridRowNumberConverter"/>
+            <converters:BooleanToForegroundColor x:Key="BooleanToForegroundColor"/>
         </ResourceDictionary>
 
     </UserControl.Resources>
@@ -26,18 +27,16 @@
             ShowGridLines="False">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1"
@@ -46,55 +45,59 @@
 
             <!-- Row 0 -->
             <TextBlock Text="{Binding ErrorMessage}" 
-                       Margin="25,0,0,0" FontSize="15" 
+                       Margin="0,0,0,0" FontSize="15" 
                        Visibility="{Binding ErrorMessageVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"
-                       Foreground="Red">
+                       Foreground="Red"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center">
             </TextBlock>
 
             <!-- Row 1 -->
-            <Button Content="Refresh" Command="{Binding RefreshCommand}" Width="70" HorizontalAlignment="Left" Height="20"></Button>
+            <Button Content="Refresh page" Command="{Binding RefreshCommand}" Width="100" HorizontalAlignment="Left" Height="20"></Button>
             
             <!-- Row 2 -->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="User identifier:"></TextBlock>
-                <TextBlock Text="{Binding UserId}" Margin="25,0,0,0" FontSize="14"></TextBlock>
+                <TextBlock Text="User identifier:" FontSize="18" Margin="0,25,0,0"></TextBlock>
+                <TextBlock Text="{Binding UserId}" Margin="25,28,0,0" FontSize="14" Foreground="Blue" FontWeight="Bold"></TextBlock>
             </StackPanel>
 
             <!-- Row 3 -->
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock Text="User barcode:"></TextBlock>
-                <TextBlock Text="{Binding UserBarcode}" Margin="25,0,0,0" FontSize="14"></TextBlock>
+                <TextBlock Text="User barcode:" FontSize="18"></TextBlock>
+                <TextBlock Text="{Binding UserBarcode}" Margin="25,0,0,0" FontSize="14" Foreground="Blue" FontWeight="Bold"></TextBlock>
             </StackPanel>
 
             <!-- Row 4 -->
-            <TextBlock Text="User name:" Margin="0,10,0,0"></TextBlock>
+            <TextBlock Text="User name:" FontSize="18" Margin="0,10,0,0"></TextBlock>
             <!-- Row 5 -->
-            <TextBlock Text="{Binding UserName}" Margin="25,0,0,0" FontSize="22"></TextBlock>
+            <TextBlock Text="{Binding UserName}" Margin="25,0,0,0" FontSize="22" Foreground="Blue" FontWeight="Bold"></TextBlock>
 
-        </StackPanel>
-
-        <Image 
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="2"
-            Source="{Binding UserProfileImagePath}"
-            Margin="5"
-            Height="150" 
-            Width="150">
-        </Image>
-
-        <StackPanel Grid.Row="2"
-                    Grid.Column="1"
-                    Orientation="Vertical">
 
             <!-- Row 6 -->
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Other informations:" Margin="0,10,0,0"></TextBlock>
-                <TextBlock Text="{Binding UserOtherInformations}" Margin="25,0,0,0"></TextBlock>
-            </StackPanel>
+            <TextBlock Text="Other informations:" Margin="0,10,0,0" FontSize="18"></TextBlock>
+            <TextBlock Text="{Binding UserOtherInformations}" Margin="25,0,0,0" Foreground="Blue" FontWeight="Bold"></TextBlock>
 
             <!-- Row 7 -->
-            <TextBlock Text="Lanses" Margin="0,25,0,0"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                
+                <TextBlock Text="Operations with user:" FontSize="18" Margin="0,15,25,0"></TextBlock>
+
+                <Button Content="Edit" 
+                        Command="{Binding EditUserCommand}"
+                        MaxWidth="100"
+                        Margin="0,15,15,0">
+                </Button>
+
+                <Button Content="{Binding DeleteOrRollbackTitle}" 
+                        Command="{Binding DeleteOrRollbackUserCommand}"
+                        MaxWidth="100"
+                        Margin="0,15,0,0">
+                </Button>
+                
+            </StackPanel>
+
+            <!-- Row 8 -->
+            <TextBlock Text="Lanses" Margin="0,25,0,0" FontSize="18" FontWeight="Bold"></TextBlock>
             <DataGrid   Grid.Row="2"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
@@ -113,13 +116,13 @@
                     <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}"/>
                     <DataGridTextColumn Header="Etart Date" Width="*" Binding="{Binding EndDate}"/>
                     <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
-                    <DataGridTextColumn Header="Active" Width="*" Binding="{Binding Active}"/>
+                    <DataGridTextColumn Header="Active" Width="*" Binding="{Binding Active}" Foreground="{Binding Path=Active, Converter={StaticResource BooleanToForegroundColor}, Mode=Default}"/>
                 </DataGrid.Columns>
 
                 <DataGrid.RowHeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
-                        Converter={StaticResource DataGridRowNumberConverter}}"
+                                    Converter={StaticResource DataGridRowNumberConverter}}"
                         Margin="2,0,2,0"/>
                     </DataTemplate>
                 </DataGrid.RowHeaderTemplate>
@@ -129,24 +132,23 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1"
-                    Grid.Column="3"
-                    Grid.RowSpan="2"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Center">
 
-            <Button Content="Edit" 
-                    Command="{Binding EditUserCommand}"
-                    MaxWidth="100">
-                
-            </Button>
-
-            <Button Content="{Binding DeleteOrRollbackTitle}" 
-                    Command="{Binding DeleteOrRollbackUserCommand}"
-                    MaxWidth="100">
-            </Button>
-            
-        </StackPanel>
         
+
+
+            
+
+        
+        <Image 
+            Grid.Row="1"
+            Grid.RowSpan="1"
+            Grid.Column="2"
+            Grid.ColumnSpan="1"
+            Source="{Binding UserProfileImagePath, Mode=TwoWay}"
+            Margin="100"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+        </Image>
+
     </Grid>
 </UserControl>

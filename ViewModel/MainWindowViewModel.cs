@@ -31,7 +31,6 @@ namespace Fitness.ViewModel
         private string loginEmail;
         private string loginPassword;
 
-        
         // Logout:
         public RelayCommand LogoutCommand { get; private set; }
 
@@ -170,6 +169,9 @@ namespace Fitness.ViewModel
 
         public void LoginCommandExecute()
         {
+            // Refresh Home's Buttons Visibility:
+            HomeViewModel.Instance.RefreshButtonsVisibility();
+
             ShowHomePage();
         }
 
@@ -227,7 +229,7 @@ namespace Fitness.ViewModel
             LoggedInUser = null;
             
             // Close opened tabs
-            CloseAllTabs();
+            CloseAllTabs();          
 
             // Go Back to Login Page
             ShowLoginPage();

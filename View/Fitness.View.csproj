@@ -163,7 +163,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\profile_icon.png" />
+    <Content Include="Resources\Images\entry_manager.png" />
+    <Content Include="Resources\Images\lansetype_manager.png" />
+    <Content Include="Resources\Images\lanse_manager.png" />
+    <Content Include="Resources\Images\profile_0.png" />
+    <Content Include="Resources\Images\profile_1.png" />
+    <Content Include="Resources\Images\profile_icon.png" />
+    <Content Include="Resources\Images\statistics_manager.png" />
+    <Content Include="Resources\Images\user.png" />
+    <Content Include="Resources\Images\user_manager.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
