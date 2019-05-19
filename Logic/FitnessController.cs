@@ -113,5 +113,11 @@ namespace Fitness.Logic
             fitnessDatabase.SaveChanges();
         }
 
+        public void InsertUser(User user)
+        {
+            fitnessDatabase.User.Add(user);
+            fitnessDatabase.SaveChanges();
+        }
+
     }
 }
