@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.Model.DBContext
 {
-    public class DBInitializer : CreateDatabaseIfNotExists<FitnessDB>    // DropCreateDatabaseAlways OR CreateDatabaseIfNotExists
+    public class DBInitializer : DropCreateDatabaseAlways<FitnessDB>    // DropCreateDatabaseAlways OR CreateDatabaseIfNotExists
     {
         List<LanseType> lanse_types;
         List<Lanse> lanses;
@@ -127,6 +127,59 @@ namespace Fitness.Model.DBContext
             context.Entry.Add(new Entry { Id = 11,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,12,13)    });
             context.Entry.Add(new Entry { Id = 12,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,12,13)    });
             context.Entry.Add(new Entry { Id = 13,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,12,13)    });
+
+            context.Entry.Add(new Entry { Id = 14,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 15,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,7,05,00)});
+            context.Entry.Add(new Entry { Id = 16,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,7,05,00)});
+            context.Entry.Add(new Entry { Id = 17,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,7,05,00)});
+            context.Entry.Add(new Entry { Id = 18,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,7,05,00)});
+            context.Entry.Add(new Entry { Id = 19,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 20,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 21,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 22,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,8,05,00)});
+            context.Entry.Add(new Entry { Id = 23,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,8,05,00)});
+            context.Entry.Add(new Entry { Id = 24,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,8,05,00)});
+            context.Entry.Add(new Entry { Id = 25,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,8,05,00)});
+            context.Entry.Add(new Entry { Id = 26,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,12,05, 00)});
+            context.Entry.Add(new Entry { Id = 27,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 28,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,9,05, 00)});
+            context.Entry.Add(new Entry { Id = 29,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,12,05, 00)});
+            context.Entry.Add(new Entry { Id = 30,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 31,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 32,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,9,05,00)});
+            context.Entry.Add(new Entry { Id = 33,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,9,05,00)});
+            context.Entry.Add(new Entry { Id = 34,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,9,05,00)});
+            context.Entry.Add(new Entry { Id = 35,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 36,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,10,05,00)});
+            context.Entry.Add(new Entry { Id = 37,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,10,05,00)});
+            context.Entry.Add(new Entry { Id = 38,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,10,05,00)});
+            context.Entry.Add(new Entry { Id = 39,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,10,05, 00)});
+            context.Entry.Add(new Entry { Id = 40,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 41,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 42,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 43,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,11,05,00)});
+            context.Entry.Add(new Entry { Id = 44,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,11,05,00)});
+            context.Entry.Add(new Entry { Id = 45,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,11,05,00)});
+            context.Entry.Add(new Entry { Id = 46,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,11,05,00)});
+            context.Entry.Add(new Entry { Id = 47,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,11,05,00)});
+            context.Entry.Add(new Entry { Id = 48,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,15,05,00)});
+            context.Entry.Add(new Entry { Id = 49,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,15,05,00)});
+            context.Entry.Add(new Entry { Id = 50,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,15,05,00)});
+            context.Entry.Add(new Entry { Id = 51,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,15,05,00)});
+            context.Entry.Add(new Entry { Id = 52,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05,00)});
+            context.Entry.Add(new Entry { Id = 53,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,18,05,00)});
+            context.Entry.Add(new Entry { Id = 54,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,18,05,00)});
+            context.Entry.Add(new Entry { Id = 55,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 56,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,16,05,00)});
+            context.Entry.Add(new Entry { Id = 57,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,16,05,00)});
+            context.Entry.Add(new Entry { Id = 58,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,16,05, 00)});
+            context.Entry.Add(new Entry { Id = 59,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,22,05,00)});
+            context.Entry.Add(new Entry { Id = 60,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 61,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,17,05, 00)});
+            context.Entry.Add(new Entry { Id = 62,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 63,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,6,05, 00)});
+            context.Entry.Add(new Entry { Id = 64,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,18,20, 00)});
+            context.Entry.Add(new Entry { Id = 65,   LanseId = 0,  Lanse = lanses.ElementAt(0),   ReceptionistId = 2,    Date = new DateTime(2019,05,20,23,05, 00)});
         }
 
     }

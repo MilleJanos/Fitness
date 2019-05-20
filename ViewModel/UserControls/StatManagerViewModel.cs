@@ -101,8 +101,8 @@ namespace ViewModel.UserControls
             TotalCount = Fitness.Logic.Data.FitnessC.GetEntryes().Count();
             Count_6_10 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=>e.Date.Hour>=6 && e.Date.Hour<10).Count();
             Count_10_14 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=>e.Date.Hour>=10 && e.Date.Hour<14).Count();
-            Count_14_20 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=>e.Date.Hour>=14 && e.Date.Hour<=20).Count();
-            Count_20_6 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=>e.Date.Hour>11 && e.Date.Hour<12).Count();
+            Count_14_20 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=>e.Date.Hour>=14 && e.Date.Hour<20).Count();
+            Count_20_6 = Fitness.Logic.Data.FitnessC.GetEntryes().Where(e=> (e.Date.Hour>20 && e.Date.Hour<=24)  || e.Date.Hour > 0 && e.Date.Hour <= 6).Count();
 
         }
         
