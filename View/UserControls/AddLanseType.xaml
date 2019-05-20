@@ -40,32 +40,49 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Add new Lanse Type" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18"></TextBlock>
+        <TextBlock Text="Add new Lanse Type" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18" FontWeight="Black"></TextBlock>
 
         <TextBlock Text="Name" Margin="0,0,10,0" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Name}" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding Name}" MinWidth="100" Grid.Row="2" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Active days" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding ActiveDays}" MinWidth="100"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3">
+            <TextBox Text="{Binding ActiveDays}" MinWidth="100" Height="25" HorizontalAlignment="Left"></TextBox>
+            <TextBlock Text="7x* where *=0 -Active or *=1 -Inactiive" Margin="10,0,10,0" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+        </StackPanel>
+        
         <TextBlock Text="Active / day" Margin="0,0,10,0" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding ActivePerDay}" MinWidth="100"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding ActivePerDay}" MinWidth="100"  Grid.Row="4" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Active hours / day" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding ActiveHoursPerDay}" MinWidth="100"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding ActiveHoursPerDay}" MinWidth="100"  Grid.Row="5" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
+        
+        <TextBlock Text="Active times / day" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding ActiveTimes}" MinWidth="100"  Grid.Row="6" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
 
-        <TextBlock Text="Price" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Price}" MinWidth="100"  Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBlock Text="Price" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Price}" MinWidth="100"  Grid.Row="7" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
 
-        <TextBlock Text="Description" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Description}" MinWidth="100"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBlock Text="Description" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Description}" MinWidth="100"  Grid.Row="8" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
 
+        <!--
         <TextBlock Text="Active" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">></TextBlock>
-        <TextBox Text="{Binding Active}" MinWidth="100"  Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
+        <TextBox Text="{Binding Active}" MinWidth="100"  Grid.Row="8" Grid.Column="3" Height="25" HorizontalAlignment="Left"></TextBox>
+        -->
 
         <TextBlock Text="Active" Margin="0,0,10,0" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <CheckBox IsChecked="{Binding Active}" MinWidth="100"  Grid.Row="9" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"></CheckBox>
+        <!--<CheckBox IsChecked="{Binding Active}" MinWidth="100"  Grid.Row="9" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"></CheckBox>-->
+        <ComboBox MinWidth="100" Margin="5"
+                  Grid.Row="9" Grid.Column="3"
+                  Width="60"
+                  Height="25"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  ItemsSource="{Binding Active}"
+                  SelectedValue="{Binding SelectedActive, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True">
+        </ComboBox>
 
         <StackPanel 
         Grid.Row="10" 

@@ -13,17 +13,19 @@ namespace Fitness.Model
         [Key]
         public int Id { get; set; }
 
-        [NotMapped]
         public LanseType Type { get; set; }
 
-        [Required]
         public int TypeId { get; set; }
+
+        public User User { get; set; }
 
         public int UserId { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public int RemainingTimes { get; set; }
 
         [Required]
         public bool Active { get; set; }

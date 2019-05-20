@@ -14,13 +14,16 @@ namespace ViewModel.UserControls
     public class AddLanseTypeViewModel : ViewModelBase, IAddLanseTypeContent
     {
 
-        private string _name;
-        private string _activeDays;
-        private int _activePerDay;
-        private int _activeHoursPerDay;
-        private int _price;
-        private string _description;
-        private bool _active;
+        private string _name = "";
+        private string _activeDays = "";
+        private string _activePerDay;
+        private string _activeHoursPerDay;
+        private string _activeTimes;
+        private string _price;
+        private string _description = "";
+        private List<string> _active;
+        private string _selectedActive;
+
 
         public RelayCommand CancelCommand { get; private set; }
         public RelayCommand SaveCommand { get; private set; }
@@ -33,6 +36,12 @@ namespace ViewModel.UserControls
 
             CancelCommand = new RelayCommand(CancelExecute);
             SaveCommand = new RelayCommand(SaveCanExecute);
+
+            Active = new List<String>();
+            Active.Add("True");
+            Active.Add("False");
+            SelectedActive = Active.First();
+
         }
 
 
@@ -76,11 +85,14 @@ namespace ViewModel.UserControls
             lt.Id = Fitness.Logic.Data.FitnessC.GetLanseTypes().Count();
             lt.Name = Name;
             lt.ActiveDays = ActiveDays;
-            lt.ActivePerDay = ActivePerDay;
-            lt.ActiveHoursPerDay = ActiveHoursPerDay;
-            lt.Price = Price;
+            lt.ActivePerDay = Int32.Parse(ActivePerDay);
+            lt.ActiveHoursPerDay = Int32.Parse(ActiveHoursPerDay);
+            lt.ActiveTimes = Int32.Parse(ActiveTimes);
+            lt.Price = Int32.Parse(Price);
             lt.Description = Description;
-            lt.Active = Active;
+            lt.Active = SelectedActive.Equals("True")
+                ? true 
+                : false;
 
 
             // Update in DB
@@ -98,24 +110,82 @@ namespace ViewModel.UserControls
                 MessageBox.Show("Name must be filled!");
                 return false;
             }
+
             if ( ActiveDays.Equals("") && ActiveDays.Length != 7 )
             {
                 MessageBox.Show("Wrong Active Days!");
                 return false;
             }
-            if ( ActivePerDay >= 0 )
+
+            if ( ! ActivePerDay.Equals("") && ActiveDays.Length == 7 )
+            {
+                try
+                {
+                    int num = Int32.Parse(ActivePerDay);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Wrong active / day! Numbers required.");
+                    return false;
+                }
+            }
+            else
             {
                 MessageBox.Show("Wrong active / day!");
                 return false;
             }
-            if ( ActiveHoursPerDay >= 0 )
+
+            if ( ! ActiveHoursPerDay.Equals("") )
+            {
+                try
+                {
+                    int num = Int32.Parse(ActiveHoursPerDay);
+                }
+                catch ( Exception )
+                {
+                    MessageBox.Show("Wrong active hours / day! Numbers required.");
+                    return false;
+                }
+            }
+            else
             {
                 MessageBox.Show("Wrong active hours / day!");
                 return false;
             }
-            if ( Price >= 0 )
+
+            if ( !ActiveTimes.Equals("") )
             {
-                MessageBox.Show("Wrong price!");
+                try
+                {
+                    int num = Int32.Parse(ActiveTimes);
+                }
+                catch ( Exception )
+                {
+                    MessageBox.Show("Wrong active times! Numbers required.");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wrong active hours / day!");
+                return false;
+            }
+
+            if ( ! Price.Equals("") )
+            {
+                try
+                {
+                    int num = Int32.Parse(Price);
+                }
+                catch ( Exception )
+                {
+                    MessageBox.Show("Wrong price! Numbers required.");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wrong price");
                 return false;
             }
             return true;
@@ -142,19 +212,25 @@ namespace ViewModel.UserControls
             set { _activeDays = value; RaisePropertyChanged();}
         }
 
-        public int ActivePerDay
+        public string ActivePerDay
         {
             get { return _activePerDay; }
             set { _activePerDay = value; RaisePropertyChanged();}
         }
 
-        public int ActiveHoursPerDay
+        public string ActiveHoursPerDay
         {
             get { return _activeHoursPerDay; }
             set { _activeHoursPerDay = value; RaisePropertyChanged();}
         }
 
-        public int Price
+        public string ActiveTimes
+        {
+            get { return _activeTimes; }
+            set { _activeTimes = value; RaisePropertyChanged(); }
+        }
+
+        public string Price
         {
             get { return _price; }
             set { _price = value; RaisePropertyChanged();}
@@ -166,10 +242,16 @@ namespace ViewModel.UserControls
             set { _description = value; RaisePropertyChanged();}
         }
 
-        public bool Active
+        public List<string> Active
         {
             get { return _active; }
             set { _active = value; RaisePropertyChanged();}
+        }
+
+        public string SelectedActive
+        {
+            get { return _selectedActive; }
+            set { _selectedActive = value; RaisePropertyChanged(); }
         }
 
     }

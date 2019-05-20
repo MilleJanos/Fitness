@@ -14,7 +14,6 @@ namespace Fitness.Model
         [Key]
         public int Id { get; set; }
 
-        [NotMapped]
         public Lanse Lanse { get; set; }
 
         [Required]

@@ -23,6 +23,8 @@ namespace Fitness.Model
         //[StringLength(maximumLength: 250, MinimumLength = 3)]
         public int ActiveHoursPerDay { get; set; }
 
+        public int ActiveTimes { get; set; }
+
         public int Price { get; set; }
 
         //[StringLength(maximumLength: 250, MinimumLength = 3)]
