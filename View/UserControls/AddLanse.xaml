@@ -23,8 +23,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
          
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -42,33 +40,42 @@
         <TextBlock Text="Add Lanse" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18"></TextBlock>
 
         <TextBlock Text="Start Date" Margin="0,0,10,0" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <DatePicker Text="{Binding StartDate}" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></DatePicker>
+        <DatePicker Text="{Binding StartDate}" Height="40" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></DatePicker>
 
         <TextBlock Text="End Date" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <DatePicker Text="{Binding EndDate}" MinWidth="100" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></DatePicker>
+        <DatePicker Text="{Binding EndDate}" Height="40" MinWidth="100" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></DatePicker>
         
         <TextBlock Text="Type" Margin="0,0,10,0" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Type}" MinWidth="100"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding Type}" ></TextBox>
+        <ComboBox Width="100"  
+                  Height="25"
+                  Margin="5"
+                  Grid.Row="4" 
+                  Grid.Column="3" 
+                  HorizontalAlignment="Left"
+                  ItemsSource="{Binding Types}"
+                  DisplayMemberPath="Name"
+                  SelectedValue="{Binding SelectedType, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True">
+        </ComboBox>
 
-        <TextBlock Text="Type Id" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding TypeId}" MinWidth="100"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
-        <TextBlock Text="User" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding User}" MinWidth="100"  Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
-        <TextBlock Text="User Id" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding UserId}" MinWidth="100"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
-        <TextBlock Text="Remaining Times" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">></TextBlock>
-        <TextBox Text="{Binding RemaingTimes}" MinWidth="100"  Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-
-        <TextBlock Text="Price" Margin="0,0,10,0" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Price}" MinWidth="100"  Grid.Row="9" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBlock Text="User" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <ComboBox Width="100"  
+                  Height="25"
+                  Margin="5"
+                  Grid.Row="5" 
+                  Grid.Column="3" 
+                  HorizontalAlignment="Left"
+                  ItemsSource="{Binding Users}"
+                  DisplayMemberPath="FirstName"
+                  SelectedValue="{Binding SelectedUser, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True">
+        </ComboBox>
 
         
        
         <StackPanel 
-            Grid.Row="12" 
+            Grid.Row="7" 
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Orientation="Horizontal"

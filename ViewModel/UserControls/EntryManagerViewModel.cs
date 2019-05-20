@@ -59,18 +59,15 @@ namespace ViewModel.UserControls
             SelectedUser = UserPicker.First();
 
         }
-        
-        private List<User> GetUsers()
-        {
-            return Fitness.Logic.Data.FitnessC.GetUsers();
-        }
 
+        
         public string Header => "Entry Manager";
 
         public RelayCommand CloseTabItemCommand { get; set; }
 
         public bool ShowCloseButton => true;
 
+        
 
         // Command's Execute
 
@@ -196,13 +193,19 @@ namespace ViewModel.UserControls
                 //List<Lanse> temp_allLanses         = Fitness.Logic.Data.FitnessC.GetLanses();
                 //List<Lanse> temp_userLanses        = temp_allLanses.Where(l => l.UserId == SelectedUser.Id).ToList();
                 //Lanse       temp_userSelectedLanse = temp_userLanses.Where(l => l.Id == SelectedLanse.Id).FirstOrDefault();
-                TimesUsed = SelectedLanse.RemainingTimes;
-                RemainingTimes = AllTimes - TimesUsed;
+                RemainingTimes = SelectedLanse.RemainingTimes;
+                TimesUsed = AllTimes - RemainingTimes;
             }
 
-            RemainingEntryCounts = "used: " + TimesUsed + " remained: " + RemainingTimes + " of " + AllTimes;
+            RemainingEntryCounts = "remained: " + RemainingTimes + " used: " + TimesUsed + " of " + AllTimes;
         }
 
+        // Methods:
+
+        private List<User> GetUsers()
+        {
+            return Fitness.Logic.Data.FitnessC.GetUsers();
+        }
 
         private void ResetDataGrid()
         {
@@ -298,8 +301,7 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
-
-
+        
         public List<User> UserPicker
         {
             get
@@ -350,8 +352,7 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
-
-
+        
         public int AllTimes
         {
             get

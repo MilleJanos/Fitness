@@ -103,14 +103,15 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Type Id" Width="*" Binding="{Binding TypeId}"/>
                 <DataGridTextColumn Header="User Id" Width="*" Binding="{Binding UserId}"/>
+                <DataGridTextColumn Header="User" Width="*" Binding="{Binding User.FirstName}"/>
+                <DataGridTextColumn Header="Type Id" Width="*" Binding="{Binding TypeId}"/>
+                <DataGridTextColumn Header="Type Id" Width="*" Binding="{Binding Type.Name}"/>
                 <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}"/>
                 <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndDate}"/>
-                <DataGridTextColumn Header="Active" Width="*" Binding="{Binding Active}"/>
-                <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="RemainingTimes" Width="*" Binding="{Binding RemainingTimes}"/>
-                <DataGridTextColumn Header="User" Width="*" Binding="{Binding User.FirstName}"/>
+                <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Active" Width="*" Binding="{Binding Active}"/>
                 
               
             </DataGrid.Columns>

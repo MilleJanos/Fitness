@@ -44,6 +44,7 @@
                             Margin="10,50,10,5"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
+                            FontWeight="Black"
                             Command="{Binding LoginCommand}"  
                             CommandParameter="{Binding ElementName=PasswordBox}"/>
 
@@ -53,17 +54,23 @@
                                 Margin="10,50,10,5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
-                                Command="{Binding DeleteMe1Command}"/>
+                                Command="{Binding DeleteMe1Command}"
+                                Foreground="Gray"
+                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
                         <Button Content="Admin2"
                                 Margin="10,50,10,5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
-                                Command="{Binding DeleteMe2Command}"/>
+                                Command="{Binding DeleteMe2Command}"
+                                Foreground="Gray"
+                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
                         <Button Content="Recepcionist1"
                                 Margin="10,50,10,5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
-                                Command="{Binding DeleteMe3Command}"/>
+                                Command="{Binding DeleteMe3Command}"
+                                Foreground="Gray"
+                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
                     </StackPanel>
 
                 </StackPanel>
@@ -115,11 +122,11 @@
                     <StackPanel>
                         
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding LoggedInUser.FirstName}" VerticalAlignment="center" FontStyle="Italic" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding LoggedInUser.LastName}" VerticalAlignment="center" FontStyle="Italic"/>
+                            <TextBlock Text="{Binding LoggedInUser.FirstName}" FontWeight="Black" VerticalAlignment="center" FontStyle="Italic" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding LoggedInUser.LastName}"  FontWeight="Black"  VerticalAlignment="center" FontStyle="Italic"/>
                         </StackPanel>
                     
-                    <TextBlock Text="{Binding LoggedInUser.Email}" VerticalAlignment="center" FontStyle="Italic"/>
+                    <TextBlock Text="{Binding LoggedInUser.Email}" Foreground="Blue" VerticalAlignment="center" FontStyle="Italic"/>
                     </StackPanel>
                         <!-- Button: Logout -->
                     <Button Content="Logout"
