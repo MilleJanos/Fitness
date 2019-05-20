@@ -448,6 +448,15 @@ namespace Fitness.ViewModel
                 AddLanseTypeViewModel vm = new AddLanseTypeViewModel();
                 SetTab(mainContent, vm);
             }
+            else if (content is IAddLanseContent)
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IAddLanseContent);
+                // Set Tab:
+                AddLanseViewModel vm = new AddLanseViewModel();
+                SetTab(mainContent, vm);
+
+            }
 
         }
 
