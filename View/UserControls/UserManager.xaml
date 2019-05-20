@@ -8,7 +8,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:Fitness.Common.Converters;assembly=Common"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
 
     <UserControl.Resources>
         
@@ -115,24 +115,36 @@
                 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Birth date" Margin="5" MinWidth="50" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <CheckBox IsChecked="{Binding BirthDateChechBox}" VerticalAlignment="Center"></CheckBox>
                     <DatePicker MinWidth="100" Margin="5"
                                 SelectedDate="{Binding
                                     Path=Filter_BirthDate,
                                     Mode=TwoWay,
                                     TargetNullValue={x:Static System:DateTime.Now}}">
                     </DatePicker>
-                    <Button Content="clear" Command="{Binding ClearBirthDateCommand}"></Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Registration date" Margin="5" MinWidth="50" TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
-                    <DatePicker MinWidth="100" Margin="5"
-                                SelectedDate="{Binding
-                                    Path=Filter_RegistrationDate,
-                                    Mode=TwoWay,
-                                    TargetNullValue={x:Static System:DateTime.Now}}">
-                    </DatePicker>
-                    <Button Content="clear" Command="{Binding ClearRegistrationDateCommand}"></Button>
+                    <CheckBox IsChecked="{Binding RegistrationDateChechBox}" VerticalAlignment="Center"></CheckBox>
+                    <StackPanel>
+                        <TextBlock Text="From" Margin="5,14,5,5" MinWidth="50" TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="To" Margin="5,22,5,5" MinWidth="50" TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <DatePicker MinWidth="100" Margin="5"
+                                    SelectedDate="{Binding
+                                        Path=Filter_FromRegistrationDate,
+                                        Mode=TwoWay,
+                                        TargetNullValue={x:Static System:DateTime.Now}}">
+                        </DatePicker>
+                        <DatePicker MinWidth="100" Margin="5"
+                                    SelectedDate="{Binding
+                                        Path=Filter_ToRegistrationDate,
+                                        Mode=TwoWay,
+                                        TargetNullValue={x:Static System:DateTime.Now}}">
+                        </DatePicker>
+                    </StackPanel>
                 </StackPanel>
 
                 <Button Content="Add new User" 

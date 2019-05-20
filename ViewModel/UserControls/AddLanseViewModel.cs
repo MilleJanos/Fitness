@@ -15,7 +15,7 @@ namespace ViewModel.UserControls
     public class AddLanseViewModel : ViewModelBase, IAddLanseContent
     {
        
-            private Lanse _currentLanse= null;
+        private Lanse _currentLanse= null;
 
         private bool _adminVisibility;
         private string _id;

@@ -368,7 +368,8 @@ namespace Fitness.ViewModel
                 EntryManagerViewModel vm = new EntryManagerViewModel();
                 SetTab(mainContent, vm);
 
-            } else if ( content is IUserManagerContent )
+            }
+            else if ( content is IUserManagerContent )
             {
                 // Test if tab is already opened:
                 mainContent = this.Contents.FirstOrDefault(c => c is IUserManagerContent);
@@ -376,7 +377,8 @@ namespace Fitness.ViewModel
                 UserManagerViewModel vm = new UserManagerViewModel();
                 SetTab(mainContent, vm);
 
-            } else if ( content is ILanseManagerContent )
+            }
+            else if ( content is ILanseManagerContent )
             {
                 // Test if tab is already opened:
                 mainContent = this.Contents.FirstOrDefault(c => c is ILanseManagerContent);
@@ -384,7 +386,8 @@ namespace Fitness.ViewModel
                 LanseManagerViewModel vm = new LanseManagerViewModel();
                 SetTab(mainContent, vm);
 
-            } else if ( content is ILanseTypeManagerContent )
+            }
+            else if ( content is ILanseTypeManagerContent )
             {
                 // Test if tab is already opened:
                 mainContent = this.Contents.FirstOrDefault(c => c is ILanseTypeManagerContent);
@@ -392,7 +395,8 @@ namespace Fitness.ViewModel
                 LanseTypeManagerViewModel vm = new LanseTypeManagerViewModel();
                 SetTab(mainContent, vm);
 
-            } else if ( content is IStatManagerContent )
+            }
+            else if ( content is IStatManagerContent )
             {
                 // Test if tab is already opened:
                 mainContent = this.Contents.FirstOrDefault(c => c is IStatManagerContent);
@@ -410,12 +414,21 @@ namespace Fitness.ViewModel
                 SetTab(mainContent, vm);
 
             }
-            else if (content is IAddUserContent)
+            else if ( content is  IAddUserContent)
             {
                 // Test if tab is already opened:
                 mainContent = this.Contents.FirstOrDefault(c => c is IAddUserContent);
                 // Set Tab:
                 AddUserViewModel vm = new AddUserViewModel();
+                SetTab(mainContent, vm);
+
+            }
+            else if ( content is IAddLanseContent )
+            {
+                // Test if tab is already opened:
+                mainContent = this.Contents.FirstOrDefault(c => c is IAddLanseContent);
+                // Set Tab:
+                AddLanseViewModel vm = new AddLanseViewModel();
                 SetTab(mainContent, vm);
 
             }

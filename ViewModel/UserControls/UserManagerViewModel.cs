@@ -12,15 +12,13 @@ namespace ViewModel.UserControls
 {
     public class UserManagerViewModel : ViewModelBase, IUserManagerContent
     {
+        // Members
         public static User LastSelectedUser = null;
-
         private List<User> _users;
         private User _selectedUser;
         private bool _adminVisibility = false;
         private bool _EmptyDataGridMessageVisibility = false;
         public RelayCommand ItemClickCommand { get; private set; }
-        public RelayCommand ClearBirthDateCommand { get; private set; }
-        public RelayCommand ClearRegistrationDateCommand { get; private set; }
         public RelayCommand AddUserCommand { get; private set; }
         public RelayCommand RefreshCommand { get; private set; }
 
@@ -33,11 +31,15 @@ namespace ViewModel.UserControls
         private string _filter_PhoneNumber;
         private List<Role> _filter_Roles;
         private string _filter_SelectedRoleStrId;
-        private DateTime _filter_BirthDate;
-        private DateTime _filter_RegistrationDate;
         private bool _showInactives;
+        private DateTime _filter_BirthDate;
+        private DateTime _filter_FromRegistrationDate;
+        private DateTime _filter_ToRegistrationDate;
+        private string _birthDateChechBox;
+        private string _registrationDateChechBox;
+        
 
-               
+
         public UserManagerViewModel()
         {
             this.Users = GetAllUsers();
@@ -49,9 +51,6 @@ namespace ViewModel.UserControls
             this._showInactives = true;
 
             this.ItemClickCommand = new RelayCommand(this.ItemClickExecute);
-            this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
-            this.ClearBirthDateCommand = new RelayCommand(this.ClearBirthDateExecute);
-            this.ClearRegistrationDateCommand = new RelayCommand(this.ClearRegistrationDateExecute);
             this.AddUserCommand = new RelayCommand(this.AddUserExecute);
             this.RefreshCommand = new RelayCommand(this.RefreshExecute);
 
@@ -63,7 +62,11 @@ namespace ViewModel.UserControls
                 {
                 AdminVisibility = false;
             }
+
+            BirthDateChechBox = "True";
+            RegistrationDateChechBox = "True";
         }
+
 
 
         public string Header => "User Manager";
@@ -95,15 +98,6 @@ namespace ViewModel.UserControls
             MainWindowViewModel.Instance.SetNewTab(new UserInfoViewModel());
         }
 
-        public void ClearBirthDateExecute()
-        {
-            Filter_BirthDate = System.DateTime.Now; // TODO: Change this logic (now == filter off) (1)
-        }
-
-        public void ClearRegistrationDateExecute()
-        {
-            Filter_RegistrationDate = System.DateTime.Now; // TODO: Change this logic (now == filter off) (2)
-        }
 
         public void AddUserExecute()
         {
@@ -116,7 +110,6 @@ namespace ViewModel.UserControls
         }
 
         // Filters:
-
 
         public List<User> Id_Filter(string strId, List<User> users)
         {
@@ -198,8 +191,7 @@ namespace ViewModel.UserControls
             return users;
         }
 
-        // Do not show admin & reteptionist registrations, only if admin is logged in
-        public List<User> Admin_Role_Filter( List<User> users )
+        public List<User> Admin_Role_Filter( List<User> users) // Do not show admin & reteptionist registrations, only if admin is logged in
         {
             if( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
             {
@@ -226,7 +218,7 @@ namespace ViewModel.UserControls
             Users = Email_Filter( Filter_Email, Users );
             Users = PhoneNumber_Filter( Filter_PhoneNumber, Users );
             Users = BirthDate_Filter( Filter_BirthDate, Users );
-            Users = RegistrationDate_Filter( Filter_RegistrationDate, Users );
+            //Users = RegistrationDate_Filter( Filter_RegistrationDate, Users );            // !!!!!!!!!!!!!!!!!!!! TODO
 
             if ( Users.Count == 0 )
             {
@@ -400,34 +392,6 @@ namespace ViewModel.UserControls
             }
         }
 
-        public DateTime Filter_BirthDate
-        {
-            get
-            {
-                return _filter_BirthDate;
-            }
-            set
-            {
-                _filter_BirthDate = value;
-                RaisePropertyChanged();
-                RecalculateFilters();
-            }
-        }
-
-        public DateTime Filter_RegistrationDate
-        {
-            get
-            {
-                return _filter_RegistrationDate;
-            }
-            set
-            {
-                _filter_RegistrationDate = value;
-                RaisePropertyChanged();
-                RecalculateFilters();
-            }
-        }
-
         public bool ShowInactives
         {
             get
@@ -442,6 +406,73 @@ namespace ViewModel.UserControls
             }
         }
 
+        public DateTime Filter_BirthDate
+        {
+            get
+            {
+                return _filter_BirthDate;
+            }
+            set
+            {
+                _filter_BirthDate = value;
+                RaisePropertyChanged();
+                RecalculateFilters();
+            }
+        }
+
+        public DateTime Filter_FromRegistrationDate
+        {
+            get
+            {
+                return _filter_FromRegistrationDate;
+            }
+            set
+            {
+                _filter_FromRegistrationDate = value;
+                RaisePropertyChanged();
+                RecalculateFilters();
+            }
+        }
+
+        public DateTime Filter_ToRegistrationDate
+        {
+            get
+            {
+                return _filter_ToRegistrationDate;
+            }
+            set
+            {
+                _filter_ToRegistrationDate = value;
+                RaisePropertyChanged();
+                RecalculateFilters();
+            }
+        }
+
+        public string BirthDateChechBox
+        {
+            get
+            {
+                return _birthDateChechBox;
+            }
+            set
+            {
+                _birthDateChechBox = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string RegistrationDateChechBox
+        {
+            get
+            {
+                return _registrationDateChechBox;
+            }
+            set
+            {
+                _registrationDateChechBox = value;
+                RaisePropertyChanged();
+            }
+        }
 
     }
 }
