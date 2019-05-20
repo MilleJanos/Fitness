@@ -45,6 +45,11 @@ namespace Fitness.Logic
             return fitnessDatabase.Entry.ToList();
         }
 
+        public List<LanseType> GetLanseTypes()
+        {
+            return fitnessDatabase.LanseType.ToList();
+        }
+
         // Recepcionist are allowed to workn only with clients
         public List<Role> GetRecepcionistAllowedRoles()
         {
@@ -70,7 +75,6 @@ namespace Fitness.Logic
                                 where u.Id == user_id
                                 select u ).SingleOrDefault();
 
-                result.Id = user.Id;
                 result.Id = user.Id;
                 result.Barcode = user.Barcode;
                 result.FirstName = user.FirstName;
@@ -107,6 +111,47 @@ namespace Fitness.Logic
 
         }
 
+
+        public void UpdateLanse(int lanse_id, Lanse lanse)
+        {
+
+            try
+            {
+                Lanse result = (from u in fitnessDatabase.Lanse
+                               where u.Id == lanse_id
+                                select u).SingleOrDefault();
+
+                result.Id = lanse.Id;
+                result.Type = lanse.Type;
+                result.TypeId = lanse.TypeId;
+                result.User = lanse.User;
+                result.UserId = lanse.UserId;
+                result.StartDate = lanse.StartDate;
+                result.EndDate = lanse.EndDate;
+                result.RemainingTimes = lanse.RemainingTimes;
+                result.Active = lanse.Active;
+                result.Price = lanse.Price;
+
+                fitnessDatabase.SaveChanges();
+
+            }
+            catch ( DbEntityValidationException e )
+            {
+                foreach ( var eve in e.EntityValidationErrors )
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach ( var ve in eve.ValidationErrors )
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+
+        }
+
         public void InsertEntry(Entry entry)
         {
             fitnessDatabase.Entry.Add(entry);
@@ -122,6 +167,12 @@ namespace Fitness.Logic
         public void InsertLanse(Lanse lanse)
         {
             fitnessDatabase.Lanse.Add(lanse);
+            fitnessDatabase.SaveChanges();
+        }
+
+        public void InsertLanseType(LanseType lanse_type)
+        {
+            fitnessDatabase.LanseType.Add(lanse_type);
             fitnessDatabase.SaveChanges();
         }
 

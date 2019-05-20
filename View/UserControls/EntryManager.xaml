@@ -20,7 +20,7 @@
 
     </UserControl.Resources>
 
-    <Grid>
+    <Grid ShowGridLines="False">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -47,19 +47,29 @@
                    Grid.ColumnSpan="3"
                    FontSize="20"
                    Margin="20"
+                   FontWeight="Bold"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
         </TextBlock>
 
         <StackPanel Grid.Row="2" 
                     Grid.Column="2"
-                    Grid.ColumnSpan="3">
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Left">
             
             <!-- Row 1 -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
-                <TextBox Text="{Binding BarcodeStr}" MinWidth="200" Margin="5"/>
+                <ComboBox MinWidth="100" Margin="5"
+                      Width="60"
+                      Height="25"
+                      ItemsSource="{Binding UserPicker, Mode=TwoWay}"
+                      DisplayMemberPath="FirstName"
+                      SelectedValue="{Binding SelectedUser, Mode=OneWayToSource}"
+                      IsSynchronizedWithCurrentItem="True"
+                      />
+                <TextBox Text="{Binding BarcodeStr, Mode=TwoWay}" MinWidth="200" Margin="5"/>
                 <Button Content="Scan barcode" 
+                        FontWeight="Black"
                         Command="{Binding BarcodeScanCommand}" Margin="5"/>
 
             </StackPanel>
@@ -75,7 +85,7 @@
             <DataGrid
                     Margin="5" 
                     ItemsSource="{Binding Lanses}"
-                    SelectedItem="{Binding SelectedLanse}"
+                    SelectedItem="{Binding SelectedLanse, UpdateSourceTrigger=PropertyChanged}"
                     AutoGenerateColumns="False"
                     IsReadOnly="True">  
 
@@ -102,16 +112,31 @@
 
         </StackPanel>
 
-        <Button Content="Enter" 
-                Grid.Column="4"
-                Grid.Row="3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Visibility="{Binding EnterButtonVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
+
+            <Button Content="Enter" 
                 MaxHeight="26"
                 Command="{Binding EnterButton}"
-                Margin="{Binding EnterButtonMargin, Mode=OneWay}"
-                Visibility="{Binding EnterButtonVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
-        </Button>
+                FontWeight="Black"
+                Margin="{Binding EnterButtonMargin, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            </Button>
+
+            <TextBlock Text="{Binding RemainingEntryCounts}"
+                       VerticalAlignment="Center"
+                       Foreground="Blue"
+                       FontWeight="Black"
+                       Margin="{Binding EnterButtonMargin, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBlock>
+
+        </StackPanel>
+        
+        
 
     </Grid>
 </UserControl>

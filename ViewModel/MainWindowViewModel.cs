@@ -427,7 +427,14 @@ namespace Fitness.ViewModel
                 EditUserViewModel vm = new EditUserViewModel();
                 SetTab(mainContent, vm);
             }
-       
+            else if ( content is IAddLanseTypeContent )
+            {
+                // Test if tab is already opened: (Only if the user is the same too)
+                mainContent = this.Contents.FirstOrDefault(c => c is IAddLanseTypeContent && (c as IAddLanseTypeContent).Header.Equals(content.Header));
+                // Set Tab:
+                AddLanseTypeViewModel vm = new AddLanseTypeViewModel();
+                SetTab(mainContent, vm);
+            }
 
         }
 
