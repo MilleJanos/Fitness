@@ -185,10 +185,10 @@ namespace ViewModel.UserControls
             }
 
             private void SaveExecute()
-        // int id = Int32.Parse(strId);
+       
         {
             Lanse lanse = new Lanse();
-            lanse.Id = Int32.Parse(Id);
+       
             lanse.Type = Type;
             lanse.TypeId= Int32.Parse(TypeId);
             lanse.User = User;
@@ -215,26 +215,13 @@ namespace ViewModel.UserControls
             {
 
 
-                if (Id.Equals(""))
-                {
-                    MessageBox.Show("Id must be filled!");
-                    return false;
-                }
-                if (Type.Equals(""))
-                {
-                    MessageBox.Show("Type must be filled!");
-                    return false;
-                }
+             
                 if (TypeId.Equals(""))
                 {
                     MessageBox.Show("TypeId must be filled!");
                     return false;
                 }
-                if (User.Equals(""))
-                {
-                    MessageBox.Show("User must be filled!");
-                    return false;
-                }
+               
              
                 if (UserId.Equals(""))
                 {
