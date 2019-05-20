@@ -27,9 +27,9 @@ namespace Fitness.Model.DBContext
 
         private void AddRoles(FitnessDB context)
         {
-            context.Role.Add(new Role { Id = 0,     StringId = "admin",         Name = "Admin",         Description = "No admin description."           });
-            context.Role.Add(new Role { Id = 1,     StringId = "receptionist",  Name = "Receptionist",  Description = "No receptionist description."    });
-            context.Role.Add(new Role { Id = 2,     StringId = "client",        Name = "Client",        Description = "No client description."          });
+            context.Role.Add(new Role { Id = 0, StringId = "admin", Name = "Admin", Description = "No admin description." });
+            context.Role.Add(new Role { Id = 1, StringId = "receptionist", Name = "Receptionist", Description = "No receptionist description." });
+            context.Role.Add(new Role { Id = 2, StringId = "client", Name = "Client", Description = "No client description." });
         }
 
         private void AddUsers(FitnessDB context)
@@ -79,9 +79,9 @@ namespace Fitness.Model.DBContext
             lanse_types.Add(new LanseType { Id = 3,    Name = "Custom #2",        ActiveTimes = 10,     ActiveDays = "1000111",     ActivePerDay = 2,     ActiveHoursPerDay = 24,     Price = 25,     Active = true,      Description="Custom One #2" } );
             lanse_types.Add(new LanseType { Id = 4,    Name = "Custom #3",        ActiveTimes = 14,     ActiveDays = "1010101",     ActivePerDay = 1,     ActiveHoursPerDay = 24,     Price = 25,     Active = false,     Description="Under Testing" } );
 
-            foreach(LanseType lt in lanse_types )
+            foreach (LanseType lt in lanse_types)
             {
-                context.LanseType.Add( lt );
+                context.LanseType.Add(lt);
             }
 
         }
@@ -105,9 +105,9 @@ namespace Fitness.Model.DBContext
             lanses.Add(new Lanse { Id = 12,    TypeId = 0,    Type = lanse_types.ElementAt(0),      RemainingTimes = 1,     UserId = 1,  User = users.ElementAt(1),  Price = 32,     StartDate = new DateTime(2019,07,09),     EndDate = new DateTime(2019,12,09),     Active = true } );
             lanses.Add(new Lanse { Id = 13,    TypeId = 3,    Type = lanse_types.ElementAt(3),      RemainingTimes = 8,    UserId = 1,  User = users.ElementAt(1),  Price = 74,     StartDate = new DateTime(2019,07,09),     EndDate = new DateTime(2019,12,09),     Active = false } );
 
-            foreach(Lanse l in lanses )
+            foreach (Lanse l in lanses)
             {
-                context.Lanse.Add( l );
+                context.Lanse.Add(l);
             }
         }
 

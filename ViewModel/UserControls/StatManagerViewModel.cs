@@ -1,5 +1,6 @@
 ﻿using Fitness.Common.Contents;
 using Fitness.Common.MVVM;
+using Fitness.Model;
 using Fitness.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,21 @@ namespace ViewModel.UserControls
 {
     public class StatManagerViewModel : ViewModelBase, IStatManagerContent
     {
+
+        private DateTime _date;
+
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public StatManagerViewModel()
         {
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
+            User user = new User();
 
         }
 
@@ -28,5 +41,11 @@ namespace ViewModel.UserControls
         {
             MainWindowViewModel.Instance.CloseTabItem(this);
         }
+
+       /* public List<User> Counter(User user)
+        {
+            return user;
+        }
+        */
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel.UserControls;
 
 namespace View.UserControls
 {
@@ -22,6 +23,8 @@ namespace View.UserControls
     {
         public AddLanse()
         {
+            DataContext = new AddLanseViewModel();
+
             InitializeComponent();
         }
     }
