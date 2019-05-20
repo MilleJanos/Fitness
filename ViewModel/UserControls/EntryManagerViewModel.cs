@@ -25,9 +25,11 @@ namespace ViewModel.UserControls
         private string _enterButtonMargin;
         private string _remainingEntryCounts;
         // For 1 Selected row:
-        private int AllTimes;
-        private int TimesUsed;
-        private int RemainingTimes;
+        private int _allTimes;
+        private int _timesUsed;
+        private int _remainingTimes;
+
+        
 
         private List<User> _userPicker;
         private User _selectedUser;
@@ -97,10 +99,12 @@ namespace ViewModel.UserControls
 
         private void RefreshInformations()
         {
+            EnterButtonVisibility = false;
+
             // List CurrentUser's Lanses:
             try
             {
-            Lanses = Fitness.Logic.Data.FitnessC.GetLansesByUserId(             CurrentUser.Id           );
+            Lanses = Fitness.Logic.Data.FitnessC.GetLansesByUserId(          CurrentUser.Id           );
             }
             catch (Exception)
             {
@@ -120,7 +124,8 @@ namespace ViewModel.UserControls
         private void MoveEnterButton()
         {
             EnterButtonVisibility = true;
-            int margin = 26 + 22 * SelectedLanseIndex;
+            //int margin = 26 + 22 * SelectedLanseIndex;
+            int margin = 26 + 22 * Lanses.FindIndex(l => l.Equals(SelectedLanse)) ;
             EnterButtonMargin = "5," + margin + ",5,5";
         }
 
@@ -157,7 +162,7 @@ namespace ViewModel.UserControls
             lanse.UserId = SelectedLanse.UserId;
             lanse.StartDate = SelectedLanse.StartDate;
             lanse.EndDate = SelectedLanse.EndDate;
-            lanse.RemainingTimes = SelectedLanse.RemainingTimes;
+            lanse.RemainingTimes = SelectedLanse.RemainingTimes - 1;
             lanse.Active = SelectedLanse.Active;
             lanse.Price = SelectedLanse.Price;
 
@@ -177,6 +182,8 @@ namespace ViewModel.UserControls
 
             Fitness.Logic.Data.FitnessC.InsertEntry(entry);
 
+            GenerateEnterButtonAndLocation();
+
             MessageBox.Show("Entered.");
         }
 
@@ -192,6 +199,8 @@ namespace ViewModel.UserControls
                 TimesUsed = SelectedLanse.RemainingTimes;
                 RemainingTimes = AllTimes - TimesUsed;
             }
+
+            RemainingEntryCounts = "used: " + TimesUsed + " remained: " + RemainingTimes + " of " + AllTimes;
         }
 
 
@@ -244,8 +253,7 @@ namespace ViewModel.UserControls
                 _selectedLanse = value;
 
                 SelectedLanseIndex = Lanses.FindIndex(l => l.Equals(_selectedLanse));
-                GenerateEnterButtonAndLocation();
-                RemainingEntryCounts = "used: " + TimesUsed + " remained: " + RemainingTimes + " of " + AllTimes; 
+                GenerateEnterButtonAndLocation();        
 
                 RaisePropertyChanged();
             }
@@ -343,5 +351,44 @@ namespace ViewModel.UserControls
             }
         }
 
+
+        public int AllTimes
+        {
+            get
+            {
+                return _allTimes;
+            }
+            set
+            {
+                _allTimes = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int TimesUsed
+        {
+            get
+            {
+                return _timesUsed;
+            }
+            set
+            {
+                _timesUsed = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int RemainingTimes
+        {
+            get
+            {
+                return _remainingTimes;
+            }
+            set
+            {
+                _remainingTimes = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }
