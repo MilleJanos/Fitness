@@ -427,6 +427,7 @@ namespace Fitness.ViewModel
                 EditUserViewModel vm = new EditUserViewModel();
                 SetTab(mainContent, vm);
             }
+       
 
         }
 

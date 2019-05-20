@@ -3,12 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.UserControls"
+             xmlns:local="clr-namespace:Fitness.View"
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View;component/Resources/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <TextBlock Text="AddLanse View" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+         
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Add Lanse" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18"></TextBlock>
+
+        <TextBlock Text="Start Date" Margin="0,0,10,0" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <DatePicker Text="{Binding StartDate}" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></DatePicker>
+
+        <TextBlock Text="End Date" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding EndDate}" MinWidth="100"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Type" Margin="0,0,10,0" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Type}" MinWidth="100"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Type Id" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding TypeId}" MinWidth="100"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="User" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding User}" MinWidth="100"  Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="User Id" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding UserId}" MinWidth="100"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Remaining Times" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">></TextBlock>
+        <TextBox Text="{Binding RemaingTimes}" MinWidth="100"  Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
+        <TextBlock Text="Price" Margin="0,0,10,0" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Text="{Binding Price}" MinWidth="100"  Grid.Row="9" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+
         
+       
+        <StackPanel 
+            Grid.Row="12" 
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <Button Content="Cancel" Command="{Binding CancelCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
+            <Button Content="Save" Command="{Binding SaveCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
+
+        </StackPanel>
     </Grid>
 </UserControl>
+

@@ -20,56 +20,72 @@ namespace ViewModel.UserControls
         private bool _adminVisibility = false;
         private bool _EmptyDataGridMessageVisibility = false;
         public RelayCommand ItemClickCommand { get; private set; }
-        public RelayCommand ClearBirthDateCommand { get; private set; }
         public RelayCommand AddLanseCommand { get; private set; }
         public RelayCommand RefreshCommand { get; private set; }
+       
 
         // Filter
 
-        private int _id;
-        private int _typeId;
-        private int _userId;
+        private string _id;
+        private string _typeId;
+        private string _userId;
         private DateTime _startDate;
         private DateTime _endDate;
-        private bool _active;
-        private int _price;
+        private string _lowprice;
+        private string _highprice;
         private bool _showInactives;
-        private int _filter_IdStr;
-        private int _filter_TypeId;
+        private string _filter_IdStr;
+        private string _filter_TypeId;
+        private string _filter_UserId;
+        private string _filter_low_Price;
+        private string _filter_high_Price;
+        private string _filter_SelectedActive;
+        private List<string> _filter_Active;
+        private string _remainingTimes;
+        private User _user;
 
-     
 
-     
-
+   
 
 
 
 
 
-        public bool Active
+        private string _priceTitle;
+
+        public string PriceTitle
         {
-            get { return _active; }
-            set { _active = value;
+            get { return _priceTitle; }
+            set { _priceTitle = value;
                 RaisePropertyChanged();
             }
         }
 
 
 
-
         public LanseManagerViewModel()
         {
             this.Lanses = GetAllLanses();
+             PriceTitle = "Price <";
+
+            Filter_Active = new List<string>();
+            Filter_Active.Add("All");
+            Filter_Active.Add("True");
+            Filter_Active.Add("False");
+
+            this.Filter_SelectedActive = Filter_Active.First() ;
 
 
-           // Users = Admin_Role_Filter(Users);       // Do not show admin & reteptionist & deleted registrations, only if admin is logged in
+            // Users = Admin_Role_Filter(Users);       // Do not show admin & reteptionist & deleted registrations, only if admin is logged in
 
             this._showInactives = true;
 
-            this.ItemClickCommand = new RelayCommand(this.ItemClickExecute);
+           
             this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
             this.AddLanseCommand = new RelayCommand(this.AddLanseExecute);
             this.RefreshCommand = new RelayCommand(this.RefreshExecute);
+
+           
 
             if (MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin"))
             {
@@ -112,26 +128,12 @@ namespace ViewModel.UserControls
 
         public void AddLanseExecute()
         {
-            MainWindowViewModel.Instance.SetNewTab(new AddUserViewModel());
+            MainWindowViewModel.Instance.SetNewTab(new AddLanseViewModel());
         }
 
         public void RefreshExecute()
         {
-           // RecalculateFilters();
-        }
-
-        // Filters:
-
-
-        public List<Lanse> Id_Filter(int Id, List<Lanse> lanses)
-        {
-            if (Id > 0)
-            {
-
-                return lanses.Where(u => u.Id == Id).ToList();
-
-            }
-            return lanses;
+           RecalculateFilters();
         }
 
         public bool EmptyDataGridMessageVisibility
@@ -146,103 +148,113 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
+        // Filters:
 
-        public List<Lanse> Type_Id_Filter(int Type_Id, List<Lanse> lanses)
+
+
+        public List<Lanse> Id_Filter(string strId, List<Lanse> lanses)
         {
-
-            if (Type_Id > 0)
+            if (strId != "" && strId != null)
             {
-               
-                    return lanses.Where(u => u.TypeId == Type_Id ).ToList();
-              
+                try
+                {
+                    int id = Int32.Parse(strId);
+                    return lanses.Where(u => u.Id == id).ToList();
+                }
+                catch
+                {
+                    return lanses;
+                }
             }
             return lanses;
         }
-        /* public List<User> FirstName_Filter(string firstname, List<User> users)
-         {
-             if (firstname != "" && firstname != null)
-                 return users.Where(u => u.FirstName.ToLower().Contains(firstname.ToLower())).ToList();
-             return users;
-         }
 
-         public List<User> LastName_Filter(string lastname, List<User> users)
-         {
-             if (lastname != "" && lastname != null)
-                 return users.Where(u => u.LastName.ToLower().Contains(lastname.ToLower())).ToList();
-             return users;
-         }
+      
 
-         public List<User> Email_Filter(string email, List<User> users)
-         {
-             if (email != "" && email != null)
-                 return users.Where(u => u.Email.ToLower().Contains(email.ToLower())).ToList();
-             return users;
-         }
+        public List<Lanse> Type_Id_Filter(string Type_Id, List<Lanse> lanses)
+        {
 
-         public List<User> PhoneNumber_Filter(string phonenumber, List<User> users)
-         {
-             if (phonenumber != "" && phonenumber != null)
-                 return users.Where(u => u.PhoneNumber.Contains(phonenumber)).ToList();
-             return users;
-         }
+            if (Type_Id != "" && Type_Id != null)
+            {
+                try
+                {
+                    int id = Int32.Parse(Type_Id);
+                    return lanses.Where(u => u.TypeId == id).ToList();
+                }
+                catch
+                {
+                    return lanses;
+                }
+            }
+            return lanses;
+        }
 
-         public List<User> Barcode_Filter(string barcode, List<User> users)
-         {
-             if (barcode != "" && barcode != null)
-                 return users.Where(u => u.Barcode.Contains(barcode)).ToList();
-             return users;
-         }
+        public List<Lanse> User_Id_Filter(string User_Is, List<Lanse> lanses)
+        {
 
-         public List<User> Role_Filter(string rolestringid, List<User> users)
-         {
-             if (!rolestringid.Equals("all"))
-                 return users.Where(u => u.Role == rolestringid).ToList();
-             return users;
-         }
+            if (User_Is != "" && User_Is != null)
+            {
+                try
+                {
+                    int id = Int32.Parse(User_Is);
+                    return lanses.Where(u => u.UserId == id).ToList();
+                }
+                catch
+                {
+                    return lanses;
+                }
+            }
+            return lanses;
+        }
 
-         public List<User> BirthDate_Filter(DateTime datetime, List<User> users)
-         {
-             if (datetime.Equals(System.DateTime.Now))      // TODO: Change this logic (now == filter off) (1)
-                 return users.Where(u => u.BirthDate.Equals(datetime)).ToList();
-             return users;
-         }
+        public List<Lanse> Price_GreatherThan_Filter(string price, List<Lanse> lanses)
+        {
 
-         public List<User> RegistrationDate_Filter(DateTime datetime, List<User> users)
-         {
-             if (datetime.Equals(System.DateTime.Now))     // TODO: Change this logic (now == filter off) (2)
-                 return users.Where(u => u.RegistrationDate.Equals(datetime)).ToList();
-             return users;
-         }
+            if (price != "" && price != null)
+            {
+                try
+                {
+                    int pricee = Int32.Parse(price);
+                    return lanses.Where(u => u.Price >= pricee).ToList();
+                }
+                catch
+                {
+                    return lanses;
+                }
+            }
+            return lanses;
+        }
 
-         public List<User> ShowInactive_Filter(bool showactive, List<User> users)
-         {
-             if (!showactive)
-                 return users.Where(u => u.Active == true).ToList();
-             return users;
-         }
+        public List<Lanse> Price_LessThan_Filter(string price, List<Lanse> lanses)
+        {
 
-
-         // Do not show admin & reteptionist registrations, only if admin is logged in
-         public List<User> Admin_Role_Filter(List<User> users)
-         {
-             if (MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin"))
-             {
-                 return users;
-             }
-             List<User> temp = users.Where(u => u.Role.Equals("client")).ToList();
-             return temp.Where(u => u.Active).ToList();
-         }
-         */
-
+            if (price != "" && price != null)
+            {
+                try
+                {
+                    int pricee = Int32.Parse(price);
+                    return lanses.Where(u => u.Price <= pricee).ToList();
+                }
+                catch
+                {
+                    return lanses;
+                }
+            }
+            return lanses;
+        }
         // Filter Properties:
 
-         public void RecalculateFilters()
+        public void RecalculateFilters()
          {
              EmptyDataGridMessageVisibility = false;
             Lanses = GetAllLanses();
 
             Lanses = Id_Filter(Filter_IdStr, Lanses);
             Lanses = Type_Id_Filter(Filter_TypeId, Lanses);
+            Lanses = User_Id_Filter(Filter_UserId, Lanses);
+            Lanses = Price_GreatherThan_Filter(Filter_HighPrice, Lanses);
+            Lanses = Activ_Filter(Filter_SelectedActive, Lanses);
+            Lanses = Price_LessThan_Filter(Filter_LowPrice, Lanses);
            
 
              if (Lanses.Count == 0)
@@ -251,11 +263,87 @@ namespace ViewModel.UserControls
              }
          }
 
+        private List<Lanse> Activ_Filter(string filter_SelectedActive, List<Lanse> lanses)
+        {
+            if (Filter_SelectedActive != null && !Filter_SelectedActive.Equals("All"))
+            {
+                bool b = filter_SelectedActive.Equals("True")
+                  ? true
+                  : false;
 
-        // Properties:
+                return lanses.Where(u => u.Active == b).ToList();
+            }
 
-       
-        public int Filter_TypeId
+            return lanses;
+        }
+
+        public string Filter_SelectedActive
+        {
+            get
+            {
+                return _filter_SelectedActive;
+            }
+            set
+            {
+                _filter_SelectedActive = value;
+                RaisePropertyChanged();
+                RecalculateFilters();
+            }
+        }
+
+        public List<string> Filter_Active
+        {
+            get { return _filter_Active; }
+            set
+            {
+                _filter_Active = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+
+        public User User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public string Filter_LowPrice
+        {
+            get { return _filter_low_Price; }
+            set {
+                _filter_low_Price = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Filter_HighPrice
+        {
+            get { return _filter_high_Price; }
+            set
+            {
+                _filter_high_Price = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+        public string Filter_UserId
+        {
+            get { return _filter_UserId; }
+            set { _filter_UserId = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Filter_TypeId
         {
             get { return _filter_TypeId; }
             set
@@ -265,7 +353,7 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
-        public int Filter_IdStr
+        public string Filter_IdStr
         {
             get
             {
@@ -278,6 +366,22 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
+
+        // Properties:
+
+
+        public string RemainingTimes
+        {
+            get { return _remainingTimes; }
+            set
+            {
+                _remainingTimes = value;
+                RecalculateFilters();
+                RaisePropertyChanged();
+            }
+        }
+
+
         public DateTime EndDate
         {
             get { return _endDate; }
@@ -297,7 +401,7 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
-        public int UserId
+        public string UserId
         {
             get { return _userId; }
             set
@@ -306,17 +410,27 @@ namespace ViewModel.UserControls
                 RaisePropertyChanged();
             }
         }
-        public int Price
+        public string LowPrice
         {
-            get { return _price; }
+            get { return _lowprice; }
             set
             {
-                _price = value;
+                _lowprice = value;
                 RaisePropertyChanged();
             }
         }
 
-        public int TypeId
+        public string HighPrice
+        {
+            get { return _highprice; }
+            set
+            {
+                _highprice = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string TypeId
         {
             get { return _typeId; }
             set
@@ -326,7 +440,7 @@ namespace ViewModel.UserControls
             }
         }
 
-        public int Id
+        public string Id
         {
             get { return _id; }
             set
@@ -389,7 +503,7 @@ namespace ViewModel.UserControls
             {
                 _showInactives = value;
                 RaisePropertyChanged();
-                //   RecalculateFilters();
+                 RecalculateFilters();
             }
         }
     }

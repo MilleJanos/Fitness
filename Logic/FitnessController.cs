@@ -119,5 +119,11 @@ namespace Fitness.Logic
             fitnessDatabase.SaveChanges();
         }
 
+        public void InsertLanse(Lanse lanse)
+        {
+            fitnessDatabase.Lanse.Add(lanse);
+            fitnessDatabase.SaveChanges();
+        }
+
     }
 }
