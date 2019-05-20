@@ -45,37 +45,41 @@
         <TextBlock Text="Edit User" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3"  TextAlignment="Center" FontSize="18"></TextBlock>
 
         <TextBlock Text="Id" Margin="0,0,10,0" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Id}" MinWidth="100" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
-        <TextBlock Text="Id changes will not be made" Margin="105,0,10,0" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"
+        <TextBox Text="{Binding Id}" MinWidth="120" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"
+                 Visibility="{Binding AdminVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"></TextBox>
+        <TextBlock Text="{Binding Id}" MinWidth="120" Grid.Row="2" Grid.Column="3" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Visibility="{Binding UserVisibility , Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+        <!--<TextBlock Text="Id changes will not be made" Margin="125,0,10,0" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Visibility="{Binding AdminVisibility , Converter={StaticResource BooleanToVisibilityConverter}}">
-        </TextBlock>
+        </TextBlock>-->
 
         <TextBlock Text="FirstName" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding FirstName}" MinWidth="100"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding FirstName}" MinWidth="120" Height="25" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="LastName" Margin="0,0,10,0" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding LastName}" MinWidth="100"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding LastName}" MinWidth="120" Height="25"  Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Barcode" Margin="0,0,10,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Barcode}" MinWidth="100"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding Barcode}" MinWidth="120" Height="25"  Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Email" Margin="0,0,10,0" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Email}" MinWidth="100"  Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding Email}" MinWidth="120"  Height="25" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Address" Margin="0,0,10,0" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding Address}" MinWidth="100"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding Address}" MinWidth="120" Height="25"  Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="OtherInformations" Margin="0,0,10,0" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">></TextBlock>
-        <TextBox Text="{Binding OtherInformations}" MinWidth="100"  Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding OtherInformations}" MinWidth="120" Width="200" Height="50" Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="PhoneNumber" Margin="0,0,10,0" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <TextBox Text="{Binding PhoneNumber}" MinWidth="100"  Grid.Row="9" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
+        <TextBox Text="{Binding PhoneNumber}" MinWidth="120"  Height="25" Grid.Row="9" Grid.Column="3" HorizontalAlignment="Left"></TextBox>
 
         <TextBlock Text="Role" Margin="0,0,10,0" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <ComboBox MinWidth="100" Margin="0,8,0,8"
+        <ComboBox MinWidth="120" Margin="0,8,0,8"
                         Grid.Row="10" 
                         Grid.Column="3"
                         MaxWidth="100"
+                        Height="25"
                         HorizontalAlignment="Left"
                         ItemsSource="{Binding Roles}"
                         DisplayMemberPath="Name"
@@ -85,7 +89,7 @@
 
 
         <!--<TextBlock Text="Active" Margin="0,0,10,0" Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-        <CheckBox IsChecked="{Binding Active}" MinWidth="100"  Grid.Row="11" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"></CheckBox>-->
+        <CheckBox IsChecked="{Binding Active}" MinWidth="120"  Grid.Row="11" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"></CheckBox>-->
 
         <StackPanel 
             Grid.Row="12" 
@@ -94,8 +98,8 @@
             Orientation="Horizontal"
             HorizontalAlignment="Center">
 
-            <Button Content="Cancel" Command="{Binding CancelCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
-            <Button Content="Save" Command="{Binding SaveCommand}" MinWidth="100" Margin="10,0,10,0"></Button>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" MinWidth="120" Margin="10,0,10,0"></Button>
+            <Button Content="Save" Command="{Binding SaveCommand}" MinWidth="120" Margin="10,0,10,0"></Button>
 
         </StackPanel>
     </Grid>

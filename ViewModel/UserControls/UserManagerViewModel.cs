@@ -45,7 +45,17 @@ namespace ViewModel.UserControls
             this.Users = GetAllUsers();
             Users = Admin_Role_Filter(Users);       // Do not show admin & reteptionist & deleted registrations, only if admin is logged in
 
-            this._filter_Roles = GetAllRoles();
+            if ( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin"))
+            {
+                this._filter_Roles = GetAllRoles();
+            }
+            else
+            {
+                // list only (all and) clients
+                this._filter_Roles = GetAllRoles().Where(r => r.StringId.Equals("client")).ToList();
+            }
+            
+
             this._filter_Roles.Add( new Role { Id = -1, StringId = "all", Name="All", Description = "Used to List all roles" } );
             this._filter_SelectedRoleStrId = "all";
             this._showInactives = true;
@@ -53,8 +63,9 @@ namespace ViewModel.UserControls
             this.ItemClickCommand = new RelayCommand(this.ItemClickExecute);
             this.AddUserCommand = new RelayCommand(this.AddUserExecute);
             this.RefreshCommand = new RelayCommand(this.RefreshExecute);
+            this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
 
-            if( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
+            if ( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
             {
                 AdminVisibility = true;
             }
@@ -62,9 +73,11 @@ namespace ViewModel.UserControls
                 {
                 AdminVisibility = false;
             }
-
-            BirthDateChechBox = "True";
-            RegistrationDateChechBox = "True";
+            Filter_BirthDate = DateTime.Now;
+            Filter_FromRegistrationDate = DateTime.Now;
+            Filter_ToRegistrationDate = DateTime.Now;
+            BirthDateChechBox = "False";
+            RegistrationDateChechBox = "False";
         }
 
 

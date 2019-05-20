@@ -42,6 +42,7 @@ namespace ViewModel.UserControls
                 : false;
             CancelCommand = new RelayCommand(CancelExecute);
             SaveCommand = new RelayCommand(SaveCanExecute);
+            this.CloseTabItemCommand = new RelayCommand(this.CloseTabItemExecute);
 
             Role clientRole = Fitness.Logic.Data.FitnessC.GetRoles().Where(u=>u.Id == 3).FirstOrDefault();
             Roles = new List<Role>();

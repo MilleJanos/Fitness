@@ -28,6 +28,7 @@ namespace ViewModel.UserControls
         private string _selectedRoleStrId;
         public bool _active;
         private bool _adminVisibility;
+        private bool _userVisibility;
 
         public RelayCommand CancelCommand { get; private set; }
         public RelayCommand SaveCommand { get; private set; }
@@ -372,6 +373,20 @@ namespace ViewModel.UserControls
             set
             {
                 _adminVisibility = value;
+                UserVisibility = ! value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool UserVisibility
+        {
+            get
+            {
+                return _userVisibility;
+            }
+            set
+            {
+                _userVisibility = value;
                 RaisePropertyChanged();
             }
         }
