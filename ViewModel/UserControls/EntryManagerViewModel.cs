@@ -50,7 +50,15 @@ namespace ViewModel.UserControls
             this.EnterButton = new RelayCommand(this.EnterCanExecute);
 
             UserPicker = new List<User>();
-            AllUser = GetUsers();
+            if( MainWindowViewModel.Instance.LoggedInUser.Role.Equals("admin") )
+            {
+                AllUser = GetUsers();
+            }
+            else
+            {
+                AllUser = GetUsers().Where(u => u.Active).ToList();
+            }
+
             UserPicker.Add( new User { FirstName = "*Not Selected*" } );
             foreach (User u in AllUser )
             {
