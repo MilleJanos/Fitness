@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.Model.DBContext
 {
-    public class DBInitializer : DropCreateDatabaseAlways<FitnessDB>    // DropCreateDatabaseAlways OR CreateDatabaseIfNotExists
+    public class DBInitializer : CreateDatabaseIfNotExists<FitnessDB>    // DropCreateDatabaseAlways OR CreateDatabaseIfNotExists
     {
         List<LanseType> lanse_types;
         List<Lanse> lanses;

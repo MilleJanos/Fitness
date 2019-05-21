@@ -50,6 +50,12 @@
 
                     <!-- DELETE ME -->
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Debug:"
+                                   Margin="10,50,10,8"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Foreground="DarkGray">
+                        </TextBlock>
                         <Button Content="Admin1"
                                 Margin="10,50,10,5"
                                 HorizontalAlignment="Center"
