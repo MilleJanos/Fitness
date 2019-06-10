@@ -135,7 +135,7 @@
             </TextBlock>
 
             <Image 
-                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\lanse_manager.png"
+                    Source="{Binding LanseTypeManagerImageStr}"
                     Width="200" Height="200">
             </Image>
 
@@ -174,7 +174,7 @@
             </TextBlock>
 
             <Image 
-                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\lansetype_manager.png"
+                    Source="{Binding LanseTypeManagerImageStr}"
                     Width="200" Height="200">
             </Image>
 
@@ -212,7 +212,7 @@
             </TextBlock>
 
             <Image 
-                    Source="C:\Users\mrtin\Desktop\Fitness\View\Resources\Images\statistics_manager.png"
+                    Source="{Binding StatisticsManagerImageStr}"
                     Width="200" Height="200">
             </Image>
 

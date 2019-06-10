@@ -171,15 +171,15 @@
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="First name" Width="*" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Barcode" Width="*" Binding="{Binding Barcode}"/>
-                <DataGridTextColumn Header="Birth Date" Width="*" Binding="{Binding BirthDate}"/>
-                <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Phone number" Width="*" Binding="{Binding PhoneNumber}"/>
-                <DataGridTextColumn Header="Registration date" Width="*" Binding="{Binding RegistrationDate}"/>
-                <DataGridTextColumn Header="Role" Width="*" Binding="{Binding Role}"/>
+                <DataGridTextColumn Header="ID"                 Width="auto"    Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="First name"         Width="*"       Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name"          Width="0.8*"       Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Barcode"            Width="1.6*"    Binding="{Binding Barcode}"/>
+                <DataGridTextColumn Header="Birth Date"         Width="*"       Binding="{Binding BirthDate}"/>
+                <DataGridTextColumn Header="Email"              Width="*"       Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Phone number"       Width="0.9*"    Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Registration date"  Width="*"       Binding="{Binding RegistrationDate}"/>
+                <DataGridTextColumn Header="Role"               Width="0.7*"       Binding="{Binding Role}"/>
             </DataGrid.Columns>
 
             <DataGrid.RowHeaderTemplate>

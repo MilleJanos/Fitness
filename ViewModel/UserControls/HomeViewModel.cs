@@ -26,7 +26,7 @@ namespace ViewModel.UserControls
         private string _userManagerImageStr;
         private string _entryManagerImageStr;
         private string _lanseManagerImageStr;
-        private string _lanseTypManagereImageStr;
+        private string _lanseTypeManagerImageStr;
         private string _statisticsManagerImageStr;
 
 
@@ -72,7 +72,7 @@ namespace ViewModel.UserControls
             UserManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/user_manager.png");
             EntryManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/entry_manager.png");
             LanseManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/lanse_manager.png");
-            LanseTypManagereImageStr = Path.GetFullPath("../../../View/Resources/Images/lansetype_manager.png");
+            LanseTypeManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/lansetype_manager.png");
             StatisticsManagerImageStr = Path.GetFullPath("../../../View/Resources/Images/statistics_manager.png");
         }
 
@@ -178,15 +178,15 @@ namespace ViewModel.UserControls
             }
         }
 
-        public string LanseTypManagereImageStr
+        public string LanseTypeManagerImageStr
         {
             get
             {
-                return _lanseTypManagereImageStr;
+                return _lanseTypeManagerImageStr;
             }
             set
             {
-                _lanseTypManagereImageStr = value;
+                _lanseTypeManagerImageStr = value;
                 RaisePropertyChanged();
             }
         }
